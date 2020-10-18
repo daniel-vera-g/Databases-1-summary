@@ -1,6 +1,4 @@
-# DB 1 Zusammenfassung
-
-## Relationale Datenbanken
+# Relationale Datenbanken
 
 ![Basics](./img/basics.png)
 ![Basics 2](./img/basics2.png)
@@ -12,7 +10,7 @@ Ubersicht:
 * Grad n: Anzahl der Domänen, über denen Tupel in Relation definiert sind(Relativ fest).
 * Kardinalität: Anzahl der Tupel in einer Relation(Sehr dynamisch).
 
-### Beziehungen
+## Beziehungen
 
 > Gegenseitige Referenzierung durch Schluessel & Fremdschluessel
 
