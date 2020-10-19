@@ -76,4 +76,27 @@ Hilfreiche SQL commands:
   * `_`  ~ `?`: Beliebiges Zeichen
   * `\`: Escape für obere Zeichen
 
-<!-- WIP SLIDE 75 -->
+## Unterabfragen
+
+> In Klammern gesetzte "neue" Abfragen, welche die Hauptaufgabe mit Werten versorgt
+
+1. Unterabfragen, die **genau** einen Wert liefern.
+2. Unterabfragen, **mehrere** Werte liefern.
+
+In `WHERE` Hauptabfrage Mengenoperationen nutzen, wenn in Unterabfragen mehrere Ergebniszeile liefert:
+
+Prüft ob:
+
+1. `IN`: Wert in Ergebnis der Unterabfragen enthalten
+2. `EXISTS`: Wenigstens eine Zeile der Unterabfrage eine Bedingung erfüllt
+3. `Θ ANY` || `Θ SOME`: Irgendeine Zeile eine Bedingung der Operatoren für Mengenvergleiche(=,<>, <=, >=... => Theta-Operatoren Θ) erfüllt.
+4. `ALL`: Alle Zeilen den Operator Θ erfüllen.
+
+### Θ Theta Operatoren
+
+Vorgang:
+
+1. Kreuzprodukt bilden(Bspw. mit doppelten Werten)
+2. Anwendung eines der Theta-Operatoren(`=,<>,...`) auf Kreuzprodukt -> Alle Zeilen, die Bedingung erfüllen werden ausgewählt.
+
+<!-- WIP Slide 89 -->
