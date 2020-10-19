@@ -89,7 +89,7 @@ Prüft ob:
 
 1. `IN`: Wert in Ergebnis der Unterabfragen enthalten
 2. `EXISTS`: Wenigstens eine Zeile der Unterabfrage eine Bedingung erfüllt
-3. `Θ ANY` || `Θ SOME`: Irgendeine Zeile eine Bedingung der Operatoren für Mengenvergleiche(=,<>, <=, >=... => Theta-Operatoren Θ) erfüllt.
+3. `Θ ANY` oder `Θ SOME`: Irgendeine Zeile eine Bedingung der Operatoren für Mengenvergleiche(=,<>, <=, >=... => Theta-Operatoren Θ) erfüllt.
 4. `ALL`: Alle Zeilen den Operator Θ erfüllen.
 
 ### Θ Theta Operatoren
