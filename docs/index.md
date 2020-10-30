@@ -7,7 +7,14 @@
   * [Operatoren](#operatoren)
   * [Datenabfragen](#datenabfragen)
   * [Unterabfragen](#unterabfragen)
-    + [Θ Theta Operatoren](#%CE%B8-theta-operatoren) 
+    + [Θ Theta Operatoren](#%CE%B8-theta-operatoren)
+    + [Funktionen](#funktionen)
+      - [Skalare Funktionen](#skalare-funktionen)
+      - [Aggregatfunktionen](#aggregatfunktionen)
+    + [Gruppierungen](#gruppierungen)
+      - [GROUP BY auf Aggregatfunktionen](#group-by-auf-aggregatfunktionen)
+      - [HAVING](#having)
+      - [Reihenfolge Ausführung der Anweisungen](#reihenfolge-ausfuhrung-der-anweisungen) 
 # Relationale Datenbanken
 
 <!-- TODO beschr. der Aufgaben des dbms  ? -->
