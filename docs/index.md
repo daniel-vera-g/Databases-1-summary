@@ -14,7 +14,8 @@
     + [Gruppierungen](#gruppierungen)
       - [GROUP BY auf Aggregatfunktionen](#group-by-auf-aggregatfunktionen)
       - [HAVING](#having)
-      - [Reihenfolge Ausführung der Anweisungen](#reihenfolge-ausfuhrung-der-anweisungen) 
+      - [Reihenfolge Ausführung der Anweisungen](#reihenfolge-ausfuhrung-der-anweisungen)
+
 # Relationale Datenbanken
 
 <!-- TODO beschr. der Aufgaben des dbms  ? -->
@@ -34,17 +35,24 @@ Ubersicht:
 > Gegenseitige Referenzierung durch Schluessel & Fremdschluessel
 
 1. Kandidatenschluessel: Zusammenstellung Attributwerte, bei der Werte der Attribute Tupel eindeutig identifizieren
-  * Relation kann aus einen oder mehrere Attributennamen bestehen.
-  * Umfasst Werte von so vielen Attributennamen wie nötig und so wenig wie möglich.
+
+* Relation kann aus einen oder mehrere Attributennamen bestehen.
+* Umfasst Werte von so vielen Attributennamen wie nötig und so wenig wie möglich.
+
 2. Primärschlüssel: Spezieller Kandidatenschluessel, der zum Primärschlüssel erklärt wird
-  * Werte mehrerer Attribute umfassen, oder als neues Attribut(**id**) speziell zu diesem Zweck eingeführt.
-  * Für Fremdschluessel Bezeichnung verwendet.
-  * Manchmal `unterstrichen` dargestellt
+
+* Werte mehrerer Attribute umfassen, oder als neues Attribut(**id**) speziell zu diesem Zweck eingeführt.
+* Für Fremdschluessel Bezeichnung verwendet.
+* Manchmal `unterstrichen` dargestellt
+
 3. Surrogatschluessel: Primärschlüssel als neues Attribut(Nicht aus Daten in Tabelle)
-  * Als __UUID__
+
+* Als __UUID__
+
 4. Fremdschluessel: Relationen miteinander zu verknüpfen und die referenzielle Integrität der DB zu gewährleisten.
-  * Immmer einen existierenden Primärschlüssel einer anderen Relation referenzieren
-  * Meist mit vorangestellten `#` notiert.
+
+* Immmer einen existierenden Primärschlüssel einer anderen Relation referenzieren
+* Meist mit vorangestellten `#` notiert.
 
 # Database management system
 
@@ -57,11 +65,14 @@ Ubersicht:
 ## Begriffe
 
 1. Katalog:
-  * DB besitzt mehrere Kataloge.
-  * Jeder Katalog besitzt mehrere Schemata.
+
+* DB besitzt mehrere Kataloge.
+* Jeder Katalog besitzt mehrere Schemata.
+
 2. Schema:
-  * In jeder DB mind. 1 Schema.
-  * In jedem Schema kann es Tabellen, Sichten, ... mit eindeutigen Namen geben.
+
+* In jeder DB mind. 1 Schema.
+* In jedem Schema kann es Tabellen, Sichten, ... mit eindeutigen Namen geben.
 
 ## Datentypen
 
@@ -88,7 +99,7 @@ Hilfreiche SQL commands:
 * `DISTINCT`: Keine Duplikate
 * `AS`: Umbenennung der Ergebnisspalten
 * `ORDER BY`: Sortierung des Ergebnisses(`DESC` oder `ASC`)
-* `BETWEEN <x> AND <y> `: Restriktionen mit Bereich
+* `BETWEEN <x> AND <y>`: Restriktionen mit Bereich
 * `AND`: Restriktionen mit mehreren Bedingungen
 * `LIKE`: Restriktionen mit Pattern matching:
   * `%` ~ `*`: Beliebige Zeichenfolge
@@ -172,6 +183,6 @@ Bspw.:
 6. *Mengenbildung* mit anderen SELECT's(Bspw. UNION)
 7. *Sortieren* nach ORDER BY
 
-### 
+###
 
 <!-- WIP Slide XX -->
