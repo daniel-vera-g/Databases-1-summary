@@ -186,4 +186,62 @@ Bspw.:
 
 ### UNION
 
-<!-- WIP Slide unions -->
+> Mehrere Tabellen verbinden & dadurch Primär/Fremdschluessel Beziehungen in Abfragen auflösen
+
+* Durch Schlüsselwort `JOIN` und `ON` informationen spezifizieren: `SELECT ... FROM table0 JOIN table1 ON table1.xyz = table0.qwe`
+* Bei `JOIN` mit Kurznamen arbeiten: `SELECT t.test1 from test t`
+
+==> Im Vergl. zu `WHERE` Klauseln, **Verbindung** direkt von **Restriktion** unterscheidbar
+
+#### Vorgang
+
+1. Erstellung **Kreuzprodukt aller** Tabellen
+2. Bestimmung zusammengehöriger Zeilen gemäß **OB-Bedingung**
+3. Anwendung d. *Restriktion* gemäß `WHERE`
+4. Durchführung d. *Projektion*, um gewünschten Spalten zu best.(* = alle Spalten aller Tabellen)
+
+#### Regeln & Hinweise zu JOIN
+
+1. **Typen** der verb. Spalten müssen kompatibel sein.
+2. Spaltennamen müssen nicht gleich sein
+3. Auch mit Theta-Operatoren(`<,>,<=, >=, ...`) verbinden
+4. `=` wird auch *Equi-Join*
+5. Bei Verbund, darf `JOIN` auch mehrere Spalten umfassen
+
+#### INNER JOIN
+
+> Gibt *Zeilen* zurück, bei denen es passende Werte in **beide** Tabellen gibt
+
+* `JOIN` = `INNER JOIN` 
+* = Schnitt = &&
+
+#### Natural JOIN
+
+> Alle *Spalten* gleichen Namens verbinden
+
+* Bspw.: `SELECT s.first_name, s.last_name, s.first_name, l.last_name FROM students s NATURAL JOIN lecturers l` = `JOIN lecturers l ON l.account = s.account AND l.first_name = s.first_name AND l.last_name = s.last_name`
+
+#### Kakadierende JOINs
+
+> Mehr als 2 Tabellen durch JOINs verbunden werden
+
+* 2mal `JOIN` benutzen um mehr als eine Tabelle zu verbinden
+
+#### Outer-JOINS
+
+> Im Vergl. zu `INNER JOIN` erlaubt es, dass eine der beiden Seiten `NULL` ist
+
+Erlaubt, dass:
+
+1. Entweder linke Tabelle(`LEFT OUTER JOIN`)
+  * Gibt **alle** Zeilen der *"linken"* Tabelle zurück & ordne passende Werte d. "rechten" Tabelle hinzu.
+
+2. rechte Tabelle(`RIGHT OUTER JOIN`)
+  * Gibt **alle** Zeilen der *"rechten"* Tabelle zurück & ordne passende Werte der "linken" Tabelle hinzu.
+
+3. oder eine der beiden Tabellen(`FULL OUTER JOIN`)
+  * Gibt alle Zeilen **beider Tabellen** zurück und ordne passende Werte beider Tabellen eineinander zu:
+
+keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
+
+<!-- WIP Slide 140 -->
