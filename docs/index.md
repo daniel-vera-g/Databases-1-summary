@@ -244,4 +244,75 @@ Erlaubt, dass:
 
 keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
 
-<!-- WIP Slide 140 -->
+### UNION
+
+> Mit SELECT gewonnene Zeilen mengentheoretisch verknüpfen:
+
+1. `UNION`: Zeilen vereinigen, Duplikate **nicht** übernommen
+2. `UNION ALL`: Zeilen vereinigen, Duplikate **werden** übernommen
+3. `INTERSECT`: **Schnittmenge** beider SELECTs
+4. `MINUS`: **Restmenge** erster `SELECT` -zweiter SELECT
+
+Bis auf `UNION` kann man bei allen, die Ergebnisse mit `IN/NOT ON` bearbeiten.
+
+#### Regeln UNION
+
+1. Alle SELECTs müssen dieselbe Anzahl an Spalten liefern
+2. Spaltennamen der Zeilenmengen können verchieden sein
+3. Spaltentypen müssen kompatibel sein. Zeilenmenge gibt Typen vor.
+
+#### Reihenfolge SELECTs bei UNION
+
+1. **Kreuzprodukt** über alle Tabellen, die durch FROM/JOIN spezifiziert werden
+2. **Restriktion**: Zeilen best., welche die WHERE-Bedingung erfüllen
+3. **Projektion**: Spalten nach SELECT-Klauseln auswählen
+4. **Gruppenbildung** nach GROUP BY
+5. **Gruppenrestriktion** nach HAVING
+6. **Mengenbildung** mit anderen SELECTs(Bspw. UNION,..)
+7. **Sortiern** nach ORDER BY
+
+### WITH
+
+> **Hilfsabfragen** für große Abfragen erstellen
+
+```sql
+WITH table_name as (
+...
+)
+
+SELECT ... FROM table_name WHERE ...
+```
+
+## SQL-DDL Pt. 1
+
+> DDL = Data Definition Language beschreibt Struktur Tabelle & Datentypen d. Spalten
+
+```sql
+CREATE TABLE <table_name>
+  (spaltendefinition1, ...., spaltendefinitionN
+  [,integritätsregel1, ...,integritätsregelN]);
+```
+
+Mit der `spaltendefinitionN`:
+
+```
+spaltendefinitionN ::= spaltenname typangabe
+  [DEFAULT klausel]
+  [spaltenintegritätsregel]
+```
+
+* *Tabellennamen* innerhalb Schemas **eindeutig** sein.
+* *Spaltennamen* innerhalb einer Tabelle **eindeutig** sein.
+* Wichtige Spaltenintegritätsregel: `NOT NULL`
+* `DEFAULT`: Angabe eines Standard-Wertes, wenn beim einfügen kein Wert angegeben wird.
+
+### Datenintegrität
+
+1. **Operationale Integrität**: Gewährleisten d. Funktion nach Hardware-Fehlern, ...Sichern gegen Probleme, die durch Mehrbenutzerbetrieb entstehen.
+2. **Semantische Integrität**: Konsistenz zur Laufzeit gemäß folgenden Bedingungen:
+  * *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
+  * *Wertebereich Integrität*: Wert wird auf gültige Domäne beschränkt
+  * *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
+  * *Benutzerdefinierte Integrität*
+
+<!-- WIP Slide 160 -->
