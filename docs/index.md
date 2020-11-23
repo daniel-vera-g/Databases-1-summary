@@ -308,6 +308,8 @@ spaltendefinitionN ::= spaltenname typangabe
 
 ### Datenintegrität
 
+Bedingungen:
+
 1. **Operationale Integrität**: Gewährleisten d. Funktion nach Hardware-Fehlern, ...Sichern gegen Probleme, die durch Mehrbenutzerbetrieb entstehen.
 2. **Semantische Integrität**: Konsistenz zur Laufzeit gemäß folgenden Bedingungen:
   * *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
@@ -315,4 +317,216 @@ spaltendefinitionN ::= spaltenname typangabe
   * *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
   * *Benutzerdefinierte Integrität*
 
-<!-- WIP Slide 160 -->
+#### Primärschlüsseln & versch. Werte
+
+> Eine oder mehrere Splaten, die einen Satz eindeutig chrakterisiert(Entitäts Integrität)
+
+```sql
+CREATE TABLE tableName {
+...
+PRIMARY KEY (columnName)
+}
+```
+
+* **Zusammengesetzte Primärschlüssel**: Falls Spalte allein nicht eindeutig, können auch mehrere Spalten für Primärschlüssel definiert werden -> Kombination aus beiden muss eindeutig sein.
+
+```sql
+ALTER TABLE tableName ADD PRIMARY KEY (columnName1, columnName2);
+```
+
+* **Eindeutigkeit**: Auch Nicht-Primärschlüssel-Spalten mit `UNIQUE` auf Eindeutigkeit geprüft werden lassen ^= *Schlüsselkandidaten*:
+  * Die Tabellenspalte(`columnName`) muss in kompletter Tabelle eindeutig sein.
+  * Auch Kombination aus mehreren Spalten möglich.
+
+```sql
+CREATE TABLE tableName {
+...
+UNIQUE (columnName)
+}
+```
+
+* **Zusätzliche Prüfungen**: `CHECK` zusätliche Bedingungen für gültige Spaltenwerte setzen.
+
+Bsp.:
+
+```sql
+CREATE TABLE tableName {
+...
+CHECK (columnName = -1 OR columnName2 > 0)
+}
+```
+
+* **Standardwerte**: `DEFAULT` Standardwerte angeben, die genutzt werden wenn Werte beim Einfügen fehlen.
+
+
+```sql
+CREATE TABLE tableName {
+...
+tableName SMALLINT DEFAULT -1
+}
+```
+
+* **Referentielle Integrität**: `FOREIGN KEY` Fremdschluessel überwachen:
+* **`ON DELETE, ON UPDATE`**: Festlegen, was passieren wenn Satz in Herkunftstabellen gelöscht/geändert wird:
+  * `NO ACTION`: *DELETE/UPDATE* der Herkunftstabelle verweigert, falls abhängigen Satz gibt
+  * `CASCADE`: *DELETE/UPDATE* der Herkunftstabelle wird an abhängige Tabelle durchgereicht
+  * ...
+  <!-- * TODO if relevant -->
+
+![](./img/datInt.png)
+
+
+### Sequenzen
+
+> Automatische vergabe von IDs
+
+```sql
+CREATE SEQUENZCE <sequence_name> [AS datatype] [START WITH <constant> [INCREMENT BY <constant>]]
+```
+
+### Binärdaten
+
+1. Ablage als BLOB(Binary Lage Object) in eigener Spalte `BLOBL(<SIZE>)`
+2. Kodierung als Text: `TEXT`
+3. Ablage auf Dateisystem außerhalb der Datenbank(Datenbank enthält nur noch bspw. Pfad zur Datei): `CAHRACTER VARYING(255)`
+
+![](./img/proConBinary.png)
+
+
+## SQL-DML
+
+> Data-Manipulation-Language = Einfügen, Ändern & Löschen
+
+### Einfügen in eine Tabelle
+
+```sql
+INSERT INTO <table_name> [(col1, col2, ..., colN)] VALUES (val1, val2, ..., valN);
+```
+
+* Einfügen mit Abfrage von Werten: Vom Inhalt her (teilweise) kopiert werden mit `INSERT INTO`
+
+### Löschen aus Tabelle
+
+```sql
+DELETE FROM <table_name> [WHERE <bedingung>]
+```
+
+Seiteneffekte:
+
+1. Durch *Foreign-Key-Contraints*, können mehr Zeilen als ursprünglich gelöscht werden
+2. ...
+
+### Ganze Tabellen Löschen
+
+```sql
+DROP TABLE <table_name> [CASCADE]
+```
+
+* `CASCADE`: Es werden auch Sätze in anderen Tabellen, die sich auf die zu löschende Tabellen bezihen entfernt.
+
+### Tabelle aktualisieren
+
+```sql
+UPDATE <table_name> SET col1 = value1,...[WHERE <bedingung>];
+```
+
+* Bei keiner `WHERE`, Änderung aller Zeilen!
+
+## SQL-DDL 2. Teil
+
+### Sichten(Views)
+
+> Virtuelle Tabellen
+
+* Berechnung "Tupel" zur Laufzeit
+* Anpassung spezielle Benutzerbedürfnisse
+* Verbergen komplexen Datenstrukturen
+* Datentypen, Constrains,... von Basistabellen übernommen
+
+```sql
+CREATE VIEW <view-name> [(<spalten-name1> [,<spalten-name2> ...])]
+AS <abfrage> [WITH CHECK OPTION]
+```
+
+* `CHECK OPTION`: stellt sicher, dass `INSERT`, `UPDATE` oder `DELETE` auf View die `WHERE` Bedingung nicht verletzen
+* In `abfrage` kein `ORDER BY`
+* Mit View als "eigene Tabelle" arbeiten
+
+#### Materialisierte Sichten
+
+> Beim ersten Zugriff auf View wird temporäre Tabelle mit Daten der View angelegt
+
+
+* Weitere Zugriffe über temporäre Tabelle
+* Nach längerer passiven Zeit, wird Tabelle wieder gelöscht
+* *Nachteile*: Höherer Speicherverbrauch & höherer Update-Aufwand
+
+```sql
+CREATE MATERIALIZED VIEW ...(See above)
+```
+
+### Indexe
+
+> Abfragen beschleunigen auf kosten zusätlichen Speicherbedarfs & verlangsamten Bearbeitung v. DML-Befehlen
+
+```sql
+CREATE [UNIQUE] [CLUSTERED] INDEX [<index-name>]
+IN <table_name> (<spalten_name1>, ...) [ASC | DESC];
+```
+
+* `UNIQUE`: Bei jeder Änderung geprüft, ob Spalte eindeutige Werte enthält
+* `CLUSTERED`: Jede Tabelle kann solchen Index besitzen. Anhand dieses Indexes werden die Zeilen sortiert gehalten.
+
+### Stored Procedures
+
+> In Datenbank gespeicherte Funktionen
+
+* Kann auch weitere *Sprachelemente* besitzen
+* Rumpf = Zeichenquette, in der Backslassh / einfache Ausführungszeichen mit Escape-Sequenzen markiert werden müssen
+* Auch `$$` nutzen um escaping zu übergehen
+
+### Trigger
+
+> Werden von Ereignissen wie z.B. dem Aktualisieren v. Daten ausgelöst & können z.B *stored Procedures* aufrufen
+
+```sql
+CREATE TRIGGER <trigger-name> <zeitpunkt> <sql-aktion> ON <tabellen-name>
+FOR EACH ROW | STATEMENT <action>
+```
+
+* `<zeitpunkt>`:
+  * `BEFORE`
+  * `AFTER`
+  * ...
+* `sql-aktion`: `INSERT, UPDATE, DELETE, ...`
+* `aktion>`: `EXECUTE, PROCEDIRE <prozedur> ...`
+
+### Datenintegrität durch Contraints
+
+> Mit Assertions, sehr mächtiges Tool um konsistente Zustände zu gewährleisten
+
+*Contraints* repräsentieren *Assertions* in SQL:
+
+1. `CHECK`: Prüfungen bei Änderungen an einer Relation
+2. `NOT NULL`: Attribut nicht `NULL`
+3. `UNIQUE`: Wert Spalte ist eindeutig
+4. `PRIMARY KEY`: Primärschlüssel einer Relation
+5. `FOREIGN KEY`: Verweis auf Attribut einer anderen Relation
+
+* Nutzen bspw. bei `ALTER`, `CREATE`, ...
+
+### Zugriffsrechte
+
+1. AutorisierungsID
+2. DB-Ausschnitt
+3. Operation
+4. Password setzen
+5. ....
+
+....See Slides for details
+
+<!-- TODO Sicherheit & Datenschutz (Klausur)-relevant? -->
+
+<!-- WIP Slide 244 -->
+
+
