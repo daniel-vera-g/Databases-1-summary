@@ -529,4 +529,177 @@ FOR EACH ROW | STATEMENT <action>
 
 <!-- WIP Slide 244 -->
 
+### Transaktionen
 
+> Folge von SQL-Anweisungen als Einheit betrachtet
+
+* Es kommt zu einem Erfolg oder zu einem Fehlschlag bei dem der Stand commitetd oder zurückgesetzt wird
+* Bsp. Situation: Viele Anwender greifen gleichzeitig auf dieselben Daten zu
+* Folge v. Operationen, die als einzelner logischer Arbeitsschritt aufgefasst werden
+* Transaktion muss folgende vier Eigenschaften erfüllen:
+  1. Atomicity
+  2. Consistency
+  3. Isolation
+  4. Durability
+
+See Slide 268 for more details.
+
+#### Fehlerklassen im Prallelbetrieb
+
+1. **Lost-Update-Problem**:
+
+* Veränderung in einer Transaktion, durch eine andere Transaktion.
+
+2. **Dirty-Read**:
+
+* Lesevorgang, der veränderte Zeilen einer anderen, noch nicht terminierten(COMMIT, ROLLBACK) Transaktion 2 liest.
+
+3. **Non-Repeatable Read**:
+
+* Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Ergebnissen.
+
+4. **Phantom Read**:
+
+* Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Anzahl an Datensätzen
+
+#### Isolationsebenen
+
+1. **Read Uncommitted**:
+* Schwächste Ebene 
+* Lediglich verlangt, dass physikalisch falsche Daten nicht gelesen werden können
+2. **Read Committed**: Standard-Isolationsebene
+3. **Repeatable Read**
+4. **Serializable**: 
+* Höchste Ebene
+* Transaktionen komplett isoliert von einander ablaufen
+* Laufen so ab, als würden sie nacheinander ausgeführt werden
+
+<!-- TODO: Fehler ausführlicher behandeln(Slide 285++) -->
+
+<!-- TODO sperren? -->
+
+#### Integritätssicherung
+
+Verschiedene Varianten:
+
+1. "Anwendung": Jede Anwendung stellt für sich Integrität her
+2. "Monitor": Integritätsmonitor innerhalb d. DBMW überwacht alle Bedingungen
+3. "Kapselung": Zugriff auf DBMS erfolgt über Zwischenschicht
+
+### NULL-Werte
+
+> Zeigen an, dass Wert fehlt
+
+1. Keine Werte an sich
+2. Führen zu missverständliche Logik: **Wahr, Falsch oder unbekannt**
+
+#### Skalare Ausdrücke
+
+> Mit Funktion `COALESCE` dem NULL-Wert eine Bedeutung geben
+
+* `COALESCE`, wählt aus Parameterliste v. links den ersten Wert aus, d. nicht NULLL ist.
+* Umkehrfunktion `NULLIF(a, b)`, die NULL zurückgibt, wenn `a==b` ansonsten erste Argument
+
+<!-- TODO NULL Werte Bzgl, versch. SQL Befehle Betrachten(JOIN, Aggregat, WHERE, ...) -->
+
+<!-- --- -->
+<!-- TODO Modelierung ..... -->
+<!-- --- -->
+
+### Java-Sprachanbindungen(JDBC)
+
+ 1. Verbindungsaufbau
+ 
+* Laden eines Datenbanktreibers durch Klasse *Classloader*
+* Angabe von
+  * Benutzer
+  * Passwort
+  * Server
+  * Port
+  * Datenbank
+  * Schema
+
+ 2. Aufbereiten d. SQL-Anweisungen: über *PreparedStatements*
+ 3. Empfangen d. Ergebnisse: Zeilenweise über *ResultSet*
+ 4. Aufräumen:
+
+ * Schließen mit jeweiliger close-Methode von:
+  * ResultSet
+  * (Prepared-)Statement
+  * Verbindung
+
+
+```java
+public static void main(String[] args) throws ClassNotFoundException {
+// 1. Laden des PostgreSQL-Treibers durch Angabe des Klassennamens
+Class.forName("org.postgresql.Driver");
+Properties props = new Properties();
+props.put("user", "db1");
+props.put("password", "db1");
+// // 2. Verbinden mit Anmelde-Daten, Erzeugung des Statements
+try (Connection connection =
+DriverManager.getConnection("jdbc:postgresql://localhost:5432/db1", props);
+Statement stmt = connection.createStatement()) {
+
+JDBC-Programmierung
+// 3. Absetzen einer SELECT-Anweisung
+ResultSet resultSet = stmt.executeQuery(
+"SELECT matr_number, first_name, last_name FROM students"); // IMPORTANT: NO SEMICOLON!
+// 4. Auslesen aller Zeilen mit einem ResultSet
+// Die Zählung der Spalten fängt mit 1 an!
+while (resultSet.next()) {
+    int matrNumber = resultSet.getInt(1); // Spaltennummer
+    String firstName = resultSet.getString(2); // Spaltennummer
+    String lastName = resultSet.getString("last_name"); // Spaltenname
+    System.out.println(matrNumber + " (" + firstName + " " + lastName + ")");
+  }
+} // Ende try
+
+// 5. Fehlerbehandlung, je nach Ort des Fehlers auch close aufrufen!
+catch (SQLException ex) {
+    System.out.println("Exception: " + ex.getLocalizedMessage());
+    ex.printStackTrace();
+  }
+}
+```
+
+* Datenbank-URL: `dbms-name://host:port/database?request-parameter`
+
+
+#### Zugriff auf Binäre Daten
+
+> Daten können sehr groß sein --> Streams nutzen
+
+1. Mit Stream:
+
+`InputStream str = resultSet.getBinaryStream(1)`
+
+2. Mit *Blob*:
+
+```java
+Blob blob = resultSet.getBlob(1);
+// Zugriff auf die Daten als Stream
+InputStream str = blob.getBinaryStream();
+// Zugriff auf alle Daten über ein Array
+byte[] data = blob.getBytes(0, blob.length()
+```
+
+#### Transaktionen
+
+```java
+...
+// 3. Isolationsebene eintragen
+connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+// 4. Auto-Commit aus Geschwindigkeitsgründen abschalten (hier überflüssig)
+connection.setAutoCommit(false);
+// 5. Absetzen einer UPDATE-Anweisung, am besten direkt im try-Block
+// wegen des automatischen Schließens!
+Statement stmt = connection.createStatement();
+int updatedRows = stmt.executeUpdate("UPDATE applications SET grade = 200 "
++ "WHERE id IN (2, 3)");
+System.out.println("Geänderte Zeilen: " + updatedRows);
+// 6. Änderungen übernehmen, rollback zur Rücknahme der Änderung
+connection.commit();
+```
+
+<!-- DOING Slide 418 -->
