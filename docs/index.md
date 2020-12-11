@@ -702,4 +702,30 @@ System.out.println("Geänderte Zeilen: " + updatedRows);
 connection.commit();
 ```
 
-<!-- DOING Slide 418 -->
+#### Prepared Statements
+
+> Platzhalter durch `Set-Operationen` später im SQL Kommando ersetzt
+
+* Durch `executeQuery()` im `ResultSet` Ergebnisse holen
+* SQL-Injection vermeiden
+* Row-Prefetching
+* Connection-Poolog: Verbindungen & Transaktione nur kurz geöffnet sein umd Server nicht unnötig unter last zu setzen
+
+```sql
+PreparedStatement stmt = connection.prepareStatement(
+"UPDATE applications SET grade = ? WHERE id = ?");
+stmt.setInt(1, 200); // Erster Wert = Note
+stmt.setInt(2, 1);
+// Zweiter Wert = id
+int updatedRows = stmt.executeUpdate();
+System.out.println("Aktualisierte Zeilen: " + updatedRows);
+stmt.setInt(1, 130); // Erster Wert = Note
+stmt.setInt(2, 2);
+// Zweiter Wert = id
+updatedRows = stmt.executeUpdate();
+stmt.commit();
+```
+
+
+
+ 
