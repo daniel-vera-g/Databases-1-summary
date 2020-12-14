@@ -244,6 +244,8 @@ Erlaubt, dass:
 
 keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
 
+See f.ex: https://www.w3schools.com/sql/sql_join_left.asp
+
 ### UNION
 
 > Mit SELECT gewonnene Zeilen mengentheoretisch verknüpfen:
