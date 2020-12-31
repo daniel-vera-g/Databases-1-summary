@@ -143,9 +143,9 @@ Hilfreiche SQL commands:
 - `BETWEEN <x> AND <y>`: Restriktionen mit Bereich
 - `AND`: Restriktionen mit mehreren Bedingungen
 - `LIKE`: Restriktionen mit Pattern matching:
-  * `%` ~ `*`: Beliebige Zeichenfolge
-  * `_`  ~ `?`: Beliebiges Zeichen
-  * `\`: Escape für obere Zeichen
+  - `%` ~ `*`: Beliebige Zeichenfolge
+  - `_`  ~ `?`: Beliebiges Zeichen
+  - `\`: Escape für obere Zeichen
 
 ## Unterabfragen
 
@@ -275,13 +275,13 @@ Bspw.:
 Erlaubt, dass:
 
 1. Entweder linke Tabelle(`LEFT OUTER JOIN`)
-  * Gibt **alle** Zeilen der *"linken"* Tabelle zurück & ordne passende Werte d. "rechten" Tabelle hinzu.
+  - Gibt **alle** Zeilen der *"linken"* Tabelle zurück & ordne passende Werte d. "rechten" Tabelle hinzu.
 
 2. rechte Tabelle(`RIGHT OUTER JOIN`)
-  * Gibt **alle** Zeilen der *"rechten"* Tabelle zurück & ordne passende Werte der "linken" Tabelle hinzu.
+  - Gibt **alle** Zeilen der *"rechten"* Tabelle zurück & ordne passende Werte der "linken" Tabelle hinzu.
 
 3. oder eine der beiden Tabellen(`FULL OUTER JOIN`)
-  * Gibt alle Zeilen **beider Tabellen** zurück und ordne passende Werte beider Tabellen eineinander zu:
+  - Gibt alle Zeilen **beider Tabellen** zurück und ordne passende Werte beider Tabellen eineinander zu:
 
 keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
 
@@ -355,10 +355,10 @@ Bedingungen:
 
 1. **Operationale Integrität**: Gewährleisten d. Funktion nach Hardware-Fehlern, ...Sichern gegen Probleme, die durch Mehrbenutzerbetrieb entstehen.
 2. **Semantische Integrität**: Konsistenz zur Laufzeit gemäß folgenden Bedingungen:
-  * *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
-  * *Wertebereich Integrität*: Wert wird auf gültige Domäne beschränkt
-  * *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
-  * *Benutzerdefinierte Integrität*
+  - *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
+  - *Wertebereich Integrität*: Wert wird auf gültige Domäne beschränkt
+  - *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
+  - *Benutzerdefinierte Integrität*
 
 #### Primärschlüsseln & versch. Werte
 
@@ -378,8 +378,8 @@ ALTER TABLE tableName ADD PRIMARY KEY (columnName1, columnName2);
 ```
 
 - **Eindeutigkeit**: Auch Nicht-Primärschlüssel-Spalten mit `UNIQUE` auf Eindeutigkeit geprüft werden lassen ^= *Schlüsselkandidaten*:
-  * Die Tabellenspalte(`columnName`) muss in kompletter Tabelle eindeutig sein.
-  * Auch Kombination aus mehreren Spalten möglich.
+  - Die Tabellenspalte(`columnName`) muss in kompletter Tabelle eindeutig sein.
+  - Auch Kombination aus mehreren Spalten möglich.
 
 ```sql
 CREATE TABLE tableName {
@@ -411,9 +411,9 @@ tableName SMALLINT DEFAULT -1
 
 - **Referentielle Integrität**: `FOREIGN KEY` Fremdschluessel überwachen:
 - **`ON DELETE, ON UPDATE`**: Festlegen, was passieren wenn Satz in Herkunftstabellen gelöscht/geändert wird:
-  * `NO ACTION`: *DELETE/UPDATE* der Herkunftstabelle verweigert, falls abhängigen Satz gibt
-  * `CASCADE`: *DELETE/UPDATE* der Herkunftstabelle wird an abhängige Tabelle durchgereicht
-  * ...
+  - `NO ACTION`: *DELETE/UPDATE* der Herkunftstabelle verweigert, falls abhängigen Satz gibt
+  - `CASCADE`: *DELETE/UPDATE* der Herkunftstabelle wird an abhängige Tabelle durchgereicht
+  - ...
   <!-- * TODO if relevant -->
 
 ![](./img/datInt.png)
@@ -538,9 +538,9 @@ FOR EACH ROW | STATEMENT <action>
 ```
 
 - `<zeitpunkt>`:
-  * `BEFORE`
-  * `AFTER`
-  * ...
+  - `BEFORE`
+  - `AFTER`
+  - ...
 - `sql-aktion`: `INSERT, UPDATE, DELETE, ...`
 - `aktion>`: `EXECUTE, PROCEDIRE <prozedur> ...`
 
@@ -655,21 +655,21 @@ Verschiedene Varianten:
  
 - Laden eines Datenbanktreibers durch Klasse *Classloader*
 - Angabe von
-  * Benutzer
-  * Passwort
-  * Server
-  * Port
-  * Datenbank
-  * Schema
+  - Benutzer
+  - Passwort
+  - Server
+  - Port
+  - Datenbank
+  - Schema
 
  2. Aufbereiten d. SQL-Anweisungen: über *PreparedStatements*
  3. Empfangen d. Ergebnisse: Zeilenweise über *ResultSet*
  4. Aufräumen:
 
  * Schließen mit jeweiliger close-Methode von:
-  * ResultSet
-  * (Prepared-)Statement
-  * Verbindung
+  - ResultSet
+  - (Prepared-)Statement
+  - Verbindung
 
 
 ```java
