@@ -344,7 +344,7 @@ CREATE TABLE <table_name>
 
 Mit der `spaltendefinitionN`:
 
-```
+```sql
 spaltendefinitionN ::= spaltenname typangabe
   [DEFAULT klausel]
   [spaltenintegritätsregel]
@@ -672,7 +672,7 @@ Verschiedene Varianten:
  3. Empfangen d. Ergebnisse: Zeilenweise über *ResultSet*
  4. Aufräumen:
 
-* Schließen mit jeweiliger close-Methode von:
+- Schließen mit jeweiliger close-Methode von:
 
 - ResultSet
 - (Prepared-)Statement
@@ -732,7 +732,10 @@ InputStream str = blob.getBinaryStream();
 byte[] data = blob.getBytes(0, blob.length()
 ```
 
+<!-- markdownlint-disable MD024 -->
+<!-- TODO check whether this double heading is legit -->
 #### Transaktionen
+<!-- markdownlint-enable MD024 -->
 
 ```java
 ...
