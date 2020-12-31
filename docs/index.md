@@ -290,7 +290,10 @@ keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
 
 See f.ex: <https://www.w3schools.com/sql/sql_join_left.asp>
 
+<!-- markdownlint-disable MD024 -->
+<!-- TODO check whether this double heading is legit -->
 ### UNION
+<!-- markdownlint-enable MD024 -->
 
 > Mit SELECT gewonnene Zeilen mengentheoretisch verknüpfen:
 
