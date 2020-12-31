@@ -77,23 +77,23 @@ Ubersicht:
 
 1. **Kandidatenschluessel**: Zusammenstellung Attributwerte, bei der Werte der Attribute Tupel eindeutig identifizieren
 
-* Relation kann aus einen oder mehrere Attributennamen bestehen.
-* Umfasst Werte von so vielen Attributennamen wie nötig und so wenig wie möglich.
+- Relation kann aus einen oder mehrere Attributennamen bestehen.
+- Umfasst Werte von so vielen Attributennamen wie nötig und so wenig wie möglich.
 
 2. **Primärschlüssel**: Spezieller Kandidatenschluessel, der zum Primärschlüssel erklärt wird
 
-* Werte mehrerer Attribute umfassen, oder als neues Attribut(**id**) speziell zu diesem Zweck eingeführt.
-* Für Fremdschluessel Bezeichnung verwendet.
-* Manchmal <ins>unterstrichen<ins> dargestellt
+- Werte mehrerer Attribute umfassen, oder als neues Attribut(**id**) speziell zu diesem Zweck eingeführt.
+- Für Fremdschluessel Bezeichnung verwendet.
+- Manchmal <ins>unterstrichen<ins> dargestellt
 
 3. **Surrogatschluessel**: Primärschlüssel als neues Attribut(Nicht aus Daten in Tabelle)
 
-* Als _UUID_
+- Als _UUID_
 
 4. **Fremdschluessel**: Relationen miteinander zu verknüpfen und die referenzielle Integrität der DB zu gewährleisten.
 
-* Immmer einen existierenden Primärschlüssel einer anderen Relation referenzieren
-* Meist mit vorangestellten `#` notiert.
+- Immmer einen existierenden Primärschlüssel einer anderen Relation referenzieren
+- Meist mit vorangestellten `#` notiert.
 
 # Database management system
 
@@ -107,13 +107,13 @@ Ubersicht:
 
 1. **Katalog**:
 
-* DB besitzt mehrere Kataloge.
-* Jeder Katalog besitzt mehrere Schemata.
+- DB besitzt mehrere Kataloge.
+- Jeder Katalog besitzt mehrere Schemata.
 
 2. **Schema**:
 
-* In jeder DB mind. 1 Schema.
-* In jedem Schema kann es Tabellen, Sichten, ... mit eindeutigen Namen geben.
+- In jeder DB mind. 1 Schema.
+- In jedem Schema kann es Tabellen, Sichten, ... mit eindeutigen Namen geben.
 
 ## Datentypen
 
@@ -137,12 +137,12 @@ SELECT <expression>
 
 Hilfreiche SQL commands:
 
-* `DISTINCT`: Keine Duplikate
-* `AS`: Umbenennung der Ergebnisspalten
-* `ORDER BY`: Sortierung des Ergebnisses(`DESC` oder `ASC`)
-* `BETWEEN <x> AND <y>`: Restriktionen mit Bereich
-* `AND`: Restriktionen mit mehreren Bedingungen
-* `LIKE`: Restriktionen mit Pattern matching:
+- `DISTINCT`: Keine Duplikate
+- `AS`: Umbenennung der Ergebnisspalten
+- `ORDER BY`: Sortierung des Ergebnisses(`DESC` oder `ASC`)
+- `BETWEEN <x> AND <y>`: Restriktionen mit Bereich
+- `AND`: Restriktionen mit mehreren Bedingungen
+- `LIKE`: Restriktionen mit Pattern matching:
   * `%` ~ `*`: Beliebige Zeichenfolge
   * `_`  ~ `?`: Beliebiges Zeichen
   * `\`: Escape für obere Zeichen
@@ -169,21 +169,21 @@ Vorgang:
 1. Kreuzprodukt bilden(Bspw. mit doppelten Werten)
 2. Anwendung eines der Theta-Operatoren(`=,<>,...`) auf Kreuzprodukt -> Alle Zeilen, die Bedingung erfüllen werden ausgewählt.
 
-* **Korrelierte Unterabfrage**: Unterabfrage nimmt direkten Bezug auf Hauptabfrage
-* Mit **AS** Schluesselwort den Tabellennamen abkürzen
+- **Korrelierte Unterabfrage**: Unterabfrage nimmt direkten Bezug auf Hauptabfrage
+- Mit **AS** Schluesselwort den Tabellennamen abkürzen
 
 ### Funktionen
 
 1. _Skalare Funktionen_ = Beziehen sich auf **ein Attribut**
 2. _Aggregatfunktionen_ = Beziehen sich auf **Menge von Zeilen**
 
-* `NULL`-Werte werden außer bei `COUNT(*)` nicht mit betrachtet.
+- `NULL`-Werte werden außer bei `COUNT(*)` nicht mit betrachtet.
 
 #### Skalare Funktionen
 
-* Mathematische Funkt.: `ABS, ACOS, ASIN, ATAN, ...`
-* Funktionen für Zeichenketten: `CHARINDEX/INSTR, LEFT, LEN(GTH), LOWER, ...`
-* Funktionen zur Zeit- & Datumsdokumentation:`CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP, ...`
+- Mathematische Funkt.: `ABS, ACOS, ASIN, ATAN, ...`
+- Funktionen für Zeichenketten: `CHARINDEX/INSTR, LEFT, LEN(GTH), LOWER, ...`
+- Funktionen zur Zeit- & Datumsdokumentation:`CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP, ...`
 
 #### Aggregatfunktionen
 
@@ -199,9 +199,9 @@ Durch Schluesselwort `GROUP BY` lassen sich Aggregatfunktionen auch auf Teilmeng
 
 Bspw.:
 
-* `SELECT lecturer_account AS acc, COUNT(grade) FROM applications GROUP BY lecturer_account` => Gruppiere identische Accounts & Zähle Noten je Gruppe(Wie viele Arbeiten hat jeder Dozent betreut?).
-* Es wird erst das `GROUP BY` ausgeführt und dann, die Aggregatfunktion.
-* Die angegeben Spaltenliste bestimmt Zeilen, die gruppiert werden.
+- `SELECT lecturer_account AS acc, COUNT(grade) FROM applications GROUP BY lecturer_account` => Gruppiere identische Accounts & Zähle Noten je Gruppe(Wie viele Arbeiten hat jeder Dozent betreut?).
+- Es wird erst das `GROUP BY` ausgeführt und dann, die Aggregatfunktion.
+- Die angegeben Spaltenliste bestimmt Zeilen, die gruppiert werden.
 
 > *Alle Spalten des SELECT's **müssen** in der GROUP BY-Klausel gebunden werden, außer jene Spalten des SELECT's die Aggregatfunktionen sind!*
 
@@ -212,8 +212,8 @@ Bspw.:
 1. `WHERE` schränkt *einzelne Zeilen* ein
 2. `HAVING` schränkt *ganze Gruppen von Zeilen* ein
 
-* Vorgang: Filterung der Einzelzeilen(WHERE) -> Gruppierung(GROUP BY) -> Einschränkung(HAVING)
-* Verwendet oft Aggregatfunktionen, da es sich oft auf Gruppen bezieht
+- Vorgang: Filterung der Einzelzeilen(WHERE) -> Gruppierung(GROUP BY) -> Einschränkung(HAVING)
+- Verwendet oft Aggregatfunktionen, da es sich oft auf Gruppen bezieht
 
 #### Reihenfolge Ausführung der Anweisungen
 
@@ -229,8 +229,8 @@ Bspw.:
 
 > Mehrere Tabellen verbinden & dadurch Primär/Fremdschluessel Beziehungen in Abfragen auflösen
 
-* Durch Schlüsselwort `JOIN` und `ON` informationen spezifizieren: `SELECT ... FROM table0 JOIN table1 ON table1.xyz = table0.qwe`
-* Bei `JOIN` mit Kurznamen arbeiten: `SELECT t.test1 from test t`
+- Durch Schlüsselwort `JOIN` und `ON` informationen spezifizieren: `SELECT ... FROM table0 JOIN table1 ON table1.xyz = table0.qwe`
+- Bei `JOIN` mit Kurznamen arbeiten: `SELECT t.test1 from test t`
 
 ==> Im Vergl. zu `WHERE` Klauseln, **Verbindung** direkt von **Restriktion** unterscheidbar
 
@@ -253,20 +253,20 @@ Bspw.:
 
 > Gibt *Zeilen* zurück, bei denen es passende Werte in **beide** Tabellen gibt
 
-* `JOIN` = `INNER JOIN` 
-* = Schnitt = &&
+- `JOIN` = `INNER JOIN` 
+- = Schnitt = &&
 
 #### Natural JOIN
 
 > Alle *Spalten* gleichen Namens verbinden
 
-* Bspw.: `SELECT s.first_name, s.last_name, s.first_name, l.last_name FROM students s NATURAL JOIN lecturers l` = `JOIN lecturers l ON l.account = s.account AND l.first_name = s.first_name AND l.last_name = s.last_name`
+- Bspw.: `SELECT s.first_name, s.last_name, s.first_name, l.last_name FROM students s NATURAL JOIN lecturers l` = `JOIN lecturers l ON l.account = s.account AND l.first_name = s.first_name AND l.last_name = s.last_name`
 
 #### Kakadierende JOINs
 
 > Mehr als 2 Tabellen durch JOINs verbunden werden
 
-* 2mal `JOIN` benutzen um mehr als eine Tabelle zu verbinden
+- 2mal `JOIN` benutzen um mehr als eine Tabelle zu verbinden
 
 #### Outer-JOINS
 
@@ -344,10 +344,10 @@ spaltendefinitionN ::= spaltenname typangabe
   [spaltenintegritätsregel]
 ```
 
-* *Tabellennamen* innerhalb Schemas **eindeutig** sein.
-* *Spaltennamen* innerhalb einer Tabelle **eindeutig** sein.
-* Wichtige Spaltenintegritätsregel: `NOT NULL`
-* `DEFAULT`: Angabe eines Standard-Wertes, wenn beim einfügen kein Wert angegeben wird.
+- *Tabellennamen* innerhalb Schemas **eindeutig** sein.
+- *Spaltennamen* innerhalb einer Tabelle **eindeutig** sein.
+- Wichtige Spaltenintegritätsregel: `NOT NULL`
+- `DEFAULT`: Angabe eines Standard-Wertes, wenn beim einfügen kein Wert angegeben wird.
 
 ### Datenintegrität
 
@@ -371,13 +371,13 @@ PRIMARY KEY (columnName)
 }
 ```
 
-* **Zusammengesetzte Primärschlüssel**: Falls Spalte allein nicht eindeutig, können auch mehrere Spalten für Primärschlüssel definiert werden -> Kombination aus beiden muss eindeutig sein.
+- **Zusammengesetzte Primärschlüssel**: Falls Spalte allein nicht eindeutig, können auch mehrere Spalten für Primärschlüssel definiert werden -> Kombination aus beiden muss eindeutig sein.
 
 ```sql
 ALTER TABLE tableName ADD PRIMARY KEY (columnName1, columnName2);
 ```
 
-* **Eindeutigkeit**: Auch Nicht-Primärschlüssel-Spalten mit `UNIQUE` auf Eindeutigkeit geprüft werden lassen ^= *Schlüsselkandidaten*:
+- **Eindeutigkeit**: Auch Nicht-Primärschlüssel-Spalten mit `UNIQUE` auf Eindeutigkeit geprüft werden lassen ^= *Schlüsselkandidaten*:
   * Die Tabellenspalte(`columnName`) muss in kompletter Tabelle eindeutig sein.
   * Auch Kombination aus mehreren Spalten möglich.
 
@@ -388,7 +388,7 @@ UNIQUE (columnName)
 }
 ```
 
-* **Zusätzliche Prüfungen**: `CHECK` zusätliche Bedingungen für gültige Spaltenwerte setzen.
+- **Zusätzliche Prüfungen**: `CHECK` zusätliche Bedingungen für gültige Spaltenwerte setzen.
 
 Bsp.:
 
@@ -399,7 +399,7 @@ CHECK (columnName = -1 OR columnName2 > 0)
 }
 ```
 
-* **Standardwerte**: `DEFAULT` Standardwerte angeben, die genutzt werden wenn Werte beim Einfügen fehlen.
+- **Standardwerte**: `DEFAULT` Standardwerte angeben, die genutzt werden wenn Werte beim Einfügen fehlen.
 
 
 ```sql
@@ -409,8 +409,8 @@ tableName SMALLINT DEFAULT -1
 }
 ```
 
-* **Referentielle Integrität**: `FOREIGN KEY` Fremdschluessel überwachen:
-* **`ON DELETE, ON UPDATE`**: Festlegen, was passieren wenn Satz in Herkunftstabellen gelöscht/geändert wird:
+- **Referentielle Integrität**: `FOREIGN KEY` Fremdschluessel überwachen:
+- **`ON DELETE, ON UPDATE`**: Festlegen, was passieren wenn Satz in Herkunftstabellen gelöscht/geändert wird:
   * `NO ACTION`: *DELETE/UPDATE* der Herkunftstabelle verweigert, falls abhängigen Satz gibt
   * `CASCADE`: *DELETE/UPDATE* der Herkunftstabelle wird an abhängige Tabelle durchgereicht
   * ...
@@ -446,7 +446,7 @@ CREATE SEQUENZCE <sequence_name> [AS datatype] [START WITH <constant> [INCREMENT
 INSERT INTO <table_name> [(col1, col2, ..., colN)] VALUES (val1, val2, ..., valN);
 ```
 
-* Einfügen mit Abfrage von Werten: Vom Inhalt her (teilweise) kopiert werden mit `INSERT INTO`
+- Einfügen mit Abfrage von Werten: Vom Inhalt her (teilweise) kopiert werden mit `INSERT INTO`
 
 ### Löschen aus Tabelle
 
@@ -465,7 +465,7 @@ Seiteneffekte:
 DROP TABLE <table_name> [CASCADE]
 ```
 
-* `CASCADE`: Es werden auch Sätze in anderen Tabellen, die sich auf die zu löschende Tabellen bezihen entfernt.
+- `CASCADE`: Es werden auch Sätze in anderen Tabellen, die sich auf die zu löschende Tabellen bezihen entfernt.
 
 ### Tabelle aktualisieren
 
@@ -473,7 +473,7 @@ DROP TABLE <table_name> [CASCADE]
 UPDATE <table_name> SET col1 = value1,...[WHERE <bedingung>];
 ```
 
-* Bei keiner `WHERE`, Änderung aller Zeilen!
+- Bei keiner `WHERE`, Änderung aller Zeilen!
 
 ## SQL-DDL 2. Teil
 
@@ -481,28 +481,28 @@ UPDATE <table_name> SET col1 = value1,...[WHERE <bedingung>];
 
 > Virtuelle Tabellen
 
-* Berechnung "Tupel" zur Laufzeit
-* Anpassung spezielle Benutzerbedürfnisse
-* Verbergen komplexen Datenstrukturen
-* Datentypen, Constrains,... von Basistabellen übernommen
+- Berechnung "Tupel" zur Laufzeit
+- Anpassung spezielle Benutzerbedürfnisse
+- Verbergen komplexen Datenstrukturen
+- Datentypen, Constrains,... von Basistabellen übernommen
 
 ```sql
 CREATE VIEW <view-name> [(<spalten-name1> [,<spalten-name2> ...])]
 AS <abfrage> [WITH CHECK OPTION]
 ```
 
-* `CHECK OPTION`: stellt sicher, dass `INSERT`, `UPDATE` oder `DELETE` auf View die `WHERE` Bedingung nicht verletzen
-* In `abfrage` kein `ORDER BY`
-* Mit View als "eigene Tabelle" arbeiten
+- `CHECK OPTION`: stellt sicher, dass `INSERT`, `UPDATE` oder `DELETE` auf View die `WHERE` Bedingung nicht verletzen
+- In `abfrage` kein `ORDER BY`
+- Mit View als "eigene Tabelle" arbeiten
 
 #### Materialisierte Sichten
 
 > Beim ersten Zugriff auf View wird temporäre Tabelle mit Daten der View angelegt
 
 
-* Weitere Zugriffe über temporäre Tabelle
-* Nach längerer passiven Zeit, wird Tabelle wieder gelöscht
-* *Nachteile*: Höherer Speicherverbrauch & höherer Update-Aufwand
+- Weitere Zugriffe über temporäre Tabelle
+- Nach längerer passiven Zeit, wird Tabelle wieder gelöscht
+- *Nachteile*: Höherer Speicherverbrauch & höherer Update-Aufwand
 
 ```sql
 CREATE MATERIALIZED VIEW ...(See above)
@@ -517,16 +517,16 @@ CREATE [UNIQUE] [CLUSTERED] INDEX [<index-name>]
 IN <table_name> (<spalten_name1>, ...) [ASC | DESC];
 ```
 
-* `UNIQUE`: Bei jeder Änderung geprüft, ob Spalte eindeutige Werte enthält
-* `CLUSTERED`: Jede Tabelle kann solchen Index besitzen. Anhand dieses Indexes werden die Zeilen sortiert gehalten.
+- `UNIQUE`: Bei jeder Änderung geprüft, ob Spalte eindeutige Werte enthält
+- `CLUSTERED`: Jede Tabelle kann solchen Index besitzen. Anhand dieses Indexes werden die Zeilen sortiert gehalten.
 
 ### Stored Procedures
 
 > In Datenbank gespeicherte Funktionen
 
-* Kann auch weitere *Sprachelemente* besitzen
-* Rumpf = Zeichenquette, in der Backslassh / einfache Ausführungszeichen mit Escape-Sequenzen markiert werden müssen
-* Auch `$$` nutzen um escaping zu übergehen
+- Kann auch weitere *Sprachelemente* besitzen
+- Rumpf = Zeichenquette, in der Backslassh / einfache Ausführungszeichen mit Escape-Sequenzen markiert werden müssen
+- Auch `$$` nutzen um escaping zu übergehen
 
 ### Trigger
 
@@ -537,12 +537,12 @@ CREATE TRIGGER <trigger-name> <zeitpunkt> <sql-aktion> ON <tabellen-name>
 FOR EACH ROW | STATEMENT <action>
 ```
 
-* `<zeitpunkt>`:
+- `<zeitpunkt>`:
   * `BEFORE`
   * `AFTER`
   * ...
-* `sql-aktion`: `INSERT, UPDATE, DELETE, ...`
-* `aktion>`: `EXECUTE, PROCEDIRE <prozedur> ...`
+- `sql-aktion`: `INSERT, UPDATE, DELETE, ...`
+- `aktion>`: `EXECUTE, PROCEDIRE <prozedur> ...`
 
 ### Datenintegrität durch Contraints
 
@@ -556,7 +556,7 @@ FOR EACH ROW | STATEMENT <action>
 4. `PRIMARY KEY`: Primärschlüssel einer Relation
 5. `FOREIGN KEY`: Verweis auf Attribut einer anderen Relation
 
-* Nutzen bspw. bei `ALTER`, `CREATE`, ...
+- Nutzen bspw. bei `ALTER`, `CREATE`, ...
 
 ### Zugriffsrechte
 
@@ -576,10 +576,10 @@ FOR EACH ROW | STATEMENT <action>
 
 > Folge von SQL-Anweisungen als Einheit betrachtet
 
-* Es kommt zu einem Erfolg oder zu einem Fehlschlag bei dem der Stand commitetd oder zurückgesetzt wird
-* Bsp. Situation: Viele Anwender greifen gleichzeitig auf dieselben Daten zu
-* Folge v. Operationen, die als einzelner logischer Arbeitsschritt aufgefasst werden
-* Transaktion muss folgende vier Eigenschaften erfüllen:
+- Es kommt zu einem Erfolg oder zu einem Fehlschlag bei dem der Stand commitetd oder zurückgesetzt wird
+- Bsp. Situation: Viele Anwender greifen gleichzeitig auf dieselben Daten zu
+- Folge v. Operationen, die als einzelner logischer Arbeitsschritt aufgefasst werden
+- Transaktion muss folgende vier Eigenschaften erfüllen:
   1. Atomicity
   2. Consistency
   3. Isolation
@@ -591,31 +591,31 @@ See Slide 268 for more details.
 
 1. **Lost-Update-Problem**:
 
-* Veränderung in einer Transaktion, durch eine andere Transaktion.
+- Veränderung in einer Transaktion, durch eine andere Transaktion.
 
 2. **Dirty-Read**:
 
-* Lesevorgang, der veränderte Zeilen einer anderen, noch nicht terminierten(COMMIT, ROLLBACK) Transaktion 2 liest.
+- Lesevorgang, der veränderte Zeilen einer anderen, noch nicht terminierten(COMMIT, ROLLBACK) Transaktion 2 liest.
 
 3. **Non-Repeatable Read**:
 
-* Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Ergebnissen.
+- Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Ergebnissen.
 
 4. **Phantom Read**:
 
-* Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Anzahl an Datensätzen
+- Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Anzahl an Datensätzen
 
 #### Isolationsebenen
 
 1. **Read Uncommitted**:
-* Schwächste Ebene 
-* Lediglich verlangt, dass physikalisch falsche Daten nicht gelesen werden können
+- Schwächste Ebene 
+- Lediglich verlangt, dass physikalisch falsche Daten nicht gelesen werden können
 2. **Read Committed**: Standard-Isolationsebene
 3. **Repeatable Read**
 4. **Serializable**: 
-* Höchste Ebene
-* Transaktionen komplett isoliert von einander ablaufen
-* Laufen so ab, als würden sie nacheinander ausgeführt werden
+- Höchste Ebene
+- Transaktionen komplett isoliert von einander ablaufen
+- Laufen so ab, als würden sie nacheinander ausgeführt werden
 
 <!-- TODO: Fehler ausführlicher behandeln(Slide 285++) -->
 
@@ -640,8 +640,8 @@ Verschiedene Varianten:
 
 > Mit Funktion `COALESCE` dem NULL-Wert eine Bedeutung geben
 
-* `COALESCE`, wählt aus Parameterliste v. links den ersten Wert aus, d. nicht NULLL ist.
-* Umkehrfunktion `NULLIF(a, b)`, die NULL zurückgibt, wenn `a==b` ansonsten erste Argument
+- `COALESCE`, wählt aus Parameterliste v. links den ersten Wert aus, d. nicht NULLL ist.
+- Umkehrfunktion `NULLIF(a, b)`, die NULL zurückgibt, wenn `a==b` ansonsten erste Argument
 
 <!-- TODO NULL Werte Bzgl, versch. SQL Befehle Betrachten(JOIN, Aggregat, WHERE, ...) -->
 
@@ -653,8 +653,8 @@ Verschiedene Varianten:
 
  1. Verbindungsaufbau
  
-* Laden eines Datenbanktreibers durch Klasse *Classloader*
-* Angabe von
+- Laden eines Datenbanktreibers durch Klasse *Classloader*
+- Angabe von
   * Benutzer
   * Passwort
   * Server
@@ -706,7 +706,7 @@ catch (SQLException ex) {
 }
 ```
 
-* Datenbank-URL: `dbms-name://host:port/database?request-parameter`
+- Datenbank-URL: `dbms-name://host:port/database?request-parameter`
 
 
 #### Zugriff auf Binäre Daten
@@ -749,10 +749,10 @@ connection.commit();
 
 > Platzhalter durch `Set-Operationen` später im SQL Kommando ersetzt
 
-* Durch `executeQuery()` im `ResultSet` Ergebnisse holen
-* SQL-Injection vermeiden
-* Row-Prefetching
-* Connection-Poolog: Verbindungen & Transaktione nur kurz geöffnet sein umd Server nicht unnötig unter last zu setzen
+- Durch `executeQuery()` im `ResultSet` Ergebnisse holen
+- SQL-Injection vermeiden
+- Row-Prefetching
+- Connection-Poolog: Verbindungen & Transaktione nur kurz geöffnet sein umd Server nicht unnötig unter last zu setzen
 
 ```sql
 PreparedStatement stmt = connection.prepareStatement(
