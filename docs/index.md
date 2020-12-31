@@ -21,7 +21,7 @@
       - [Regeln & Hinweise zu JOIN](#regeln--hinweise-zu-join)
       - [INNER JOIN](#inner-join)
       - [Natural JOIN](#natural-join)
-      - [Kakadierende JOINs](#kakadierende-joins)
+      - [Kaskadierende JOINs](#kaskadierende-joins)
       - [Outer-JOINS](#outer-joins)
     - [UNION](#union-1)
       - [Regeln UNION](#regeln-union)
@@ -43,7 +43,7 @@
     - [Indexe](#indexe)
     - [Stored Procedures](#stored-procedures)
     - [Trigger](#trigger)
-    - [Datenintegrität durch Contraints](#datenintegrität-durch-contraints)
+    - [Datenintegrität durch Constraints](#datenintegrität-durch-constraints)
     - [Zugriffsrechte](#zugriffsrechte)
     - [Transaktionen](#transaktionen)
       - [Fehlerklassen im Prallelbetrieb](#fehlerklassen-im-prallelbetrieb)
@@ -64,7 +64,7 @@
 ![Basics](./img/basics.png)
 ![Basics 2](./img/basics2.png)
 
-Ubersicht:
+Übersicht:
 
 ![Overview](./img/overview.png)
 
@@ -73,26 +73,26 @@ Ubersicht:
 
 ## Beziehungen
 
-> Gegenseitige Referenzierung durch Schluessel & Fremdschluessel
+> Gegenseitige Referenzierung durch Schlüssel & Fremdschlüssel
 
-1. **Kandidatenschluessel**: Zusammenstellung Attributwerte, bei der Werte der Attribute Tupel eindeutig identifizieren
+1. **Kandidatenschlüssel**: Zusammenstellung Attributwerte, bei der Werte der Attribute Tupel eindeutig identifizieren
 
 - Relation kann aus einen oder mehrere Attributennamen bestehen.
 - Umfasst Werte von so vielen Attributennamen wie nötig und so wenig wie möglich.
 
-2. **Primärschlüssel**: Spezieller Kandidatenschluessel, der zum Primärschlüssel erklärt wird
+2. **Primärschlüssel**: Spezieller Kandidatenschlüssel, der zum Primärschlüssel erklärt wird
 
 - Werte mehrerer Attribute umfassen, oder als neues Attribut(**id**) speziell zu diesem Zweck eingeführt.
-- Für Fremdschluessel Bezeichnung verwendet.
+- Für Fremdschlüssel Bezeichnung verwendet.
 - Manchmal <ins>unterstrichen<ins> dargestellt
 
-3. **Surrogatschluessel**: Primärschlüssel als neues Attribut(Nicht aus Daten in Tabelle)
+3. **Surrogatschlüssel**: Primärschlüssel als neues Attribut(Nicht aus Daten in Tabelle)
 
 - Als _UUID_
 
-4. **Fremdschluessel**: Relationen miteinander zu verknüpfen und die referenzielle Integrität der DB zu gewährleisten.
+4. **Fremdschlüssel**: Relationen miteinander zu verknüpfen und die referenzielle Integrität der DB zu gewährleisten.
 
-- Immmer einen existierenden Primärschlüssel einer anderen Relation referenzieren
+- Immer einen existierenden Primärschlüssel einer anderen Relation referenzieren
 - Meist mit vorangestellten `#` notiert.
 
 # Database management system
@@ -170,7 +170,7 @@ Vorgang:
 2. Anwendung eines der Theta-Operatoren(`=,<>,...`) auf Kreuzprodukt -> Alle Zeilen, die Bedingung erfüllen werden ausgewählt.
 
 - **Korrelierte Unterabfrage**: Unterabfrage nimmt direkten Bezug auf Hauptabfrage
-- Mit **AS** Schluesselwort den Tabellennamen abkürzen
+- Mit **AS** Schlüsselwort den Tabellennamen abkürzen
 
 ### Funktionen
 
@@ -195,7 +195,7 @@ Beispiele: `AVG`, `MAX`, `MIN`, `SUM`, `STDDEV`(Standardabweichung der Werte), `
 
 #### GROUP BY auf Aggregatfunktionen
 
-Durch Schluesselwort `GROUP BY` lassen sich Aggregatfunktionen auch auf Teilmengen von Zeilen anwenden.
+Durch Schlüsselwort `GROUP BY` lassen sich Aggregatfunktionen auch auf Teilmengen von Zeilen anwenden.
 
 Bspw.:
 
@@ -219,15 +219,15 @@ Bspw.:
 
 1. *Kreuzprodukt* über alle Tabellen, die FROM spezifiziert
 2. *Restriktion*: Zeilen bestimmen, welche die WHERE-Bedingung erfüllen
-3. *Projektion*: Spalten entnehmen, die SELECT Klausel entstprechen & ggf. umbenennen
+3. *Projektion*: Spalten entnehmen, die SELECT Klausel entsprechen & ggf. umbenennen
 4. *Gruppenbildung*: Nach GROUP BY
-5. *Grupper-Restriktion*: Nach HAVING
+5. *Gruppen-Restriktion*: Nach HAVING
 6. *Mengenbildung* mit anderen SELECT's(Bspw. UNION)
 7. *Sortieren* nach ORDER BY
 
 ### UNION
 
-> Mehrere Tabellen verbinden & dadurch Primär/Fremdschluessel Beziehungen in Abfragen auflösen
+> Mehrere Tabellen verbinden & dadurch Primär/Fremdschlüssel Beziehungen in Abfragen auflösen
 
 - Durch Schlüsselwort `JOIN` und `ON` informationen spezifizieren: `SELECT ... FROM table0 JOIN table1 ON table1.xyz = table0.qwe`
 - Bei `JOIN` mit Kurznamen arbeiten: `SELECT t.test1 from test t`
@@ -262,7 +262,7 @@ Bspw.:
 
 - Bspw.: `SELECT s.first_name, s.last_name, s.first_name, l.last_name FROM students s NATURAL JOIN lecturers l` = `JOIN lecturers l ON l.account = s.account AND l.first_name = s.first_name AND l.last_name = s.last_name`
 
-#### Kakadierende JOINs
+#### Kaskadierende JOINs
 
 > Mehr als 2 Tabellen durch JOINs verbunden werden
 
@@ -286,7 +286,7 @@ Erlaubt, dass:
 
 - Gibt alle Zeilen **beider Tabellen** zurück und ordne passende Werte beider Tabellen eineinander zu:
 
-keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
+keine Entsprechung in anderer Tabelle benötigt(= darf `NULL` sein).
 
 See f.ex: <https://www.w3schools.com/sql/sql_join_left.asp>
 
@@ -307,7 +307,7 @@ Bis auf `UNION` kann man bei allen, die Ergebnisse mit `IN/NOT ON` bearbeiten.
 #### Regeln UNION
 
 1. Alle SELECTs müssen dieselbe Anzahl an Spalten liefern
-2. Spaltennamen der Zeilenmengen können verchieden sein
+2. Spaltennamen der Zeilenmengen können verschiedene sein
 3. Spaltentypen müssen kompatibel sein. Zeilenmenge gibt Typen vor.
 
 #### Reihenfolge SELECTs bei UNION
@@ -318,7 +318,7 @@ Bis auf `UNION` kann man bei allen, die Ergebnisse mit `IN/NOT ON` bearbeiten.
 4. **Gruppenbildung** nach GROUP BY
 5. **Gruppenrestriktion** nach HAVING
 6. **Mengenbildung** mit anderen SELECTs(Bspw. UNION,..)
-7. **Sortiern** nach ORDER BY
+7. **Sortieren** nach ORDER BY
 
 ### WITH
 
@@ -364,12 +364,12 @@ Bedingungen:
 
 - *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
 - *Wertebereich Integrität*: Wert wird auf gültige Domäne beschränkt
-- *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
+- *Referentielle Integrität*: Fremdschlüssel-Beziehungen werden überwacht
 - *Benutzerdefinierte Integrität*
 
 #### Primärschlüsseln & versch. Werte
 
-> Eine oder mehrere Splaten, die einen Satz eindeutig chrakterisiert(Entitäts Integrität)
+> Eine oder mehrere Spalten, die einen Satz eindeutig charakterisiert(Entitäts Integrität)
 
 ```sql
 CREATE TABLE tableName {
@@ -395,7 +395,7 @@ UNIQUE (columnName)
 }
 ```
 
-- **Zusätzliche Prüfungen**: `CHECK` zusätliche Bedingungen für gültige Spaltenwerte setzen.
+- **Zusätzliche Prüfungen**: `CHECK` zusätzliche Bedingungen für gültige Spaltenwerte setzen.
 
 Bsp.:
 
@@ -415,7 +415,7 @@ tableName SMALLINT DEFAULT -1
 }
 ```
 
-- **Referentielle Integrität**: `FOREIGN KEY` Fremdschluessel überwachen:
+- **Referentielle Integrität**: `FOREIGN KEY` Fremdschlüssel überwachen:
 - **`ON DELETE, ON UPDATE`**: Festlegen, was passieren wenn Satz in Herkunftstabellen gelöscht/geändert wird:
   - `NO ACTION`: *DELETE/UPDATE* der Herkunftstabelle verweigert, falls abhängigen Satz gibt
   - `CASCADE`: *DELETE/UPDATE* der Herkunftstabelle wird an abhängige Tabelle durchgereicht
@@ -460,7 +460,7 @@ DELETE FROM <table_name> [WHERE <bedingung>]
 
 Seiteneffekte:
 
-1. Durch *Foreign-Key-Contraints*, können mehr Zeilen als ursprünglich gelöscht werden
+1. Durch *Foreign-Key-Constraints*, können mehr Zeilen als ursprünglich gelöscht werden
 2. ...
 
 ### Ganze Tabellen Löschen
@@ -469,7 +469,7 @@ Seiteneffekte:
 DROP TABLE <table_name> [CASCADE]
 ```
 
-- `CASCADE`: Es werden auch Sätze in anderen Tabellen, die sich auf die zu löschende Tabellen bezihen entfernt.
+- `CASCADE`: Es werden auch Sätze in anderen Tabellen, die sich auf die zu löschende Tabellen beziehen entfernt.
 
 ### Tabelle aktualisieren
 
@@ -513,7 +513,7 @@ CREATE MATERIALIZED VIEW ...(See above)
 
 ### Indexe
 
-> Abfragen beschleunigen auf kosten zusätlichen Speicherbedarfs & verlangsamten Bearbeitung v. DML-Befehlen
+> Abfragen beschleunigen auf kosten zusätzlichen Speicherbedarfs & verlangsamten Bearbeitung v. DML-Befehlen
 
 ```sql
 CREATE [UNIQUE] [CLUSTERED] INDEX [<index-name>]
@@ -528,7 +528,7 @@ IN <table_name> (<spalten_name1>, ...) [ASC | DESC];
 > In Datenbank gespeicherte Funktionen
 
 - Kann auch weitere *Sprachelemente* besitzen
-- Rumpf = Zeichenquette, in der Backslassh / einfache Ausführungszeichen mit Escape-Sequenzen markiert werden müssen
+- Rumpf = Zeichenkette, in der Backslashs / einfache Ausführungszeichen mit Escape-Sequenzen markiert werden müssen
 - Auch `$$` nutzen um escaping zu übergehen
 
 ### Trigger
@@ -545,13 +545,13 @@ FOR EACH ROW | STATEMENT <action>
   - `AFTER`
   - ...
 - `sql-aktion`: `INSERT, UPDATE, DELETE, ...`
-- `aktion>`: `EXECUTE, PROCEDIRE <prozedur> ...`
+- `aktion>`: `EXECUTE, PROCEDERE <prozedur> ...`
 
-### Datenintegrität durch Contraints
+### Datenintegrität durch Constraints
 
 > Mit Assertions, sehr mächtiges Tool um konsistente Zustände zu gewährleisten
 
-*Contraints* repräsentieren *Assertions* in SQL:
+*Constraints* repräsentieren *Assertions* in SQL:
 
 1. `CHECK`: Prüfungen bei Änderungen an einer Relation
 2. `NOT NULL`: Attribut nicht `NULL`
@@ -579,7 +579,7 @@ FOR EACH ROW | STATEMENT <action>
 
 > Folge von SQL-Anweisungen als Einheit betrachtet
 
-- Es kommt zu einem Erfolg oder zu einem Fehlschlag bei dem der Stand commitetd oder zurückgesetzt wird
+- Es kommt zu einem Erfolg oder zu einem Fehlschlag bei dem der Stand committed oder zurückgesetzt wird
 - Bsp. Situation: Viele Anwender greifen gleichzeitig auf dieselben Daten zu
 - Folge v. Operationen, die als einzelner logischer Arbeitsschritt aufgefasst werden
 - Transaktion muss folgende vier Eigenschaften erfüllen:
@@ -646,13 +646,13 @@ Verschiedene Varianten:
 
 > Mit Funktion `COALESCE` dem NULL-Wert eine Bedeutung geben
 
-- `COALESCE`, wählt aus Parameterliste v. links den ersten Wert aus, d. nicht NULLL ist.
+- `COALESCE`, wählt aus Parameterliste v. links den ersten Wert aus, d. nicht NULL ist.
 - Umkehrfunktion `NULLIF(a, b)`, die NULL zurückgibt, wenn `a==b` ansonsten erste Argument
 
 <!-- TODO NULL Werte Bzgl, versch. SQL Befehle Betrachten(JOIN, Aggregat, WHERE, ...) -->
 
 <!-- --- -->
-<!-- TODO Modelierung ..... -->
+<!-- TODO Modellierung ..... -->
 <!-- --- -->
 
 ### Java-Sprachanbindungen(JDBC)
@@ -760,7 +760,7 @@ connection.commit();
 - Durch `executeQuery()` im `ResultSet` Ergebnisse holen
 - SQL-Injection vermeiden
 - Row-Prefetching
-- Connection-Poolog: Verbindungen & Transaktione nur kurz geöffnet sein umd Server nicht unnötig unter last zu setzen
+- Connection-Pool: Verbindungen & Transaktionen nur kurz geöffnet sein umd Server nicht unnötig unter last zu setzen
 
 ```sql
 PreparedStatement stmt = connection.prepareStatement(
