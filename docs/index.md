@@ -253,7 +253,7 @@ Bspw.:
 
 > Gibt *Zeilen* zurück, bei denen es passende Werte in **beide** Tabellen gibt
 
-- `JOIN` = `INNER JOIN` 
+- `JOIN` = `INNER JOIN`
 - = Schnitt = &&
 
 #### Natural JOIN
@@ -275,17 +275,20 @@ Bspw.:
 Erlaubt, dass:
 
 1. Entweder linke Tabelle(`LEFT OUTER JOIN`)
-  - Gibt **alle** Zeilen der *"linken"* Tabelle zurück & ordne passende Werte d. "rechten" Tabelle hinzu.
+
+- Gibt **alle** Zeilen der *"linken"* Tabelle zurück & ordne passende Werte d. "rechten" Tabelle hinzu.
 
 2. rechte Tabelle(`RIGHT OUTER JOIN`)
-  - Gibt **alle** Zeilen der *"rechten"* Tabelle zurück & ordne passende Werte der "linken" Tabelle hinzu.
+
+- Gibt **alle** Zeilen der *"rechten"* Tabelle zurück & ordne passende Werte der "linken" Tabelle hinzu.
 
 3. oder eine der beiden Tabellen(`FULL OUTER JOIN`)
-  - Gibt alle Zeilen **beider Tabellen** zurück und ordne passende Werte beider Tabellen eineinander zu:
+
+- Gibt alle Zeilen **beider Tabellen** zurück und ordne passende Werte beider Tabellen eineinander zu:
 
 keine Entsprechung in anderer Tabelle benötigt(= dard `NULL` sein).
 
-See f.ex: https://www.w3schools.com/sql/sql_join_left.asp
+See f.ex: <https://www.w3schools.com/sql/sql_join_left.asp>
 
 ### UNION
 
@@ -355,10 +358,11 @@ Bedingungen:
 
 1. **Operationale Integrität**: Gewährleisten d. Funktion nach Hardware-Fehlern, ...Sichern gegen Probleme, die durch Mehrbenutzerbetrieb entstehen.
 2. **Semantische Integrität**: Konsistenz zur Laufzeit gemäß folgenden Bedingungen:
-  - *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
-  - *Wertebereich Integrität*: Wert wird auf gültige Domäne beschränkt
-  - *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
-  - *Benutzerdefinierte Integrität*
+
+- *Entitäts-Integrität*: Zeile in Tabelle ist eindeutig
+- *Wertebereich Integrität*: Wert wird auf gültige Domäne beschränkt
+- *Referentielle Integrität*: Fremdschluessel-Beziehungen werden überwacht
+- *Benutzerdefinierte Integrität*
 
 #### Primärschlüsseln & versch. Werte
 
@@ -401,7 +405,6 @@ CHECK (columnName = -1 OR columnName2 > 0)
 
 - **Standardwerte**: `DEFAULT` Standardwerte angeben, die genutzt werden wenn Werte beim Einfügen fehlen.
 
-
 ```sql
 CREATE TABLE tableName {
 ...
@@ -418,7 +421,6 @@ tableName SMALLINT DEFAULT -1
 
 ![](./img/datInt.png)
 
-
 ### Sequenzen
 
 > Automatische vergabe von IDs
@@ -434,7 +436,6 @@ CREATE SEQUENZCE <sequence_name> [AS datatype] [START WITH <constant> [INCREMENT
 3. Ablage auf Dateisystem außerhalb der Datenbank(Datenbank enthält nur noch bspw. Pfad zur Datei): `CAHRACTER VARYING(255)`
 
 ![](./img/proConBinary.png)
-
 
 ## SQL-DML
 
@@ -498,7 +499,6 @@ AS <abfrage> [WITH CHECK OPTION]
 #### Materialisierte Sichten
 
 > Beim ersten Zugriff auf View wird temporäre Tabelle mit Daten der View angelegt
-
 
 - Weitere Zugriffe über temporäre Tabelle
 - Nach längerer passiven Zeit, wird Tabelle wieder gelöscht
@@ -608,11 +608,14 @@ See Slide 268 for more details.
 #### Isolationsebenen
 
 1. **Read Uncommitted**:
-- Schwächste Ebene 
+
+- Schwächste Ebene
 - Lediglich verlangt, dass physikalisch falsche Daten nicht gelesen werden können
+
 2. **Read Committed**: Standard-Isolationsebene
 3. **Repeatable Read**
-4. **Serializable**: 
+4. **Serializable**:
+
 - Höchste Ebene
 - Transaktionen komplett isoliert von einander ablaufen
 - Laufen so ab, als würden sie nacheinander ausgeführt werden
@@ -652,7 +655,7 @@ Verschiedene Varianten:
 ### Java-Sprachanbindungen(JDBC)
 
  1. Verbindungsaufbau
- 
+
 - Laden eines Datenbanktreibers durch Klasse *Classloader*
 - Angabe von
   - Benutzer
@@ -666,11 +669,11 @@ Verschiedene Varianten:
  3. Empfangen d. Ergebnisse: Zeilenweise über *ResultSet*
  4. Aufräumen:
 
- * Schließen mit jeweiliger close-Methode von:
-  - ResultSet
-  - (Prepared-)Statement
-  - Verbindung
+* Schließen mit jeweiliger close-Methode von:
 
+- ResultSet
+- (Prepared-)Statement
+- Verbindung
 
 ```java
 public static void main(String[] args) throws ClassNotFoundException {
@@ -707,7 +710,6 @@ catch (SQLException ex) {
 ```
 
 - Datenbank-URL: `dbms-name://host:port/database?request-parameter`
-
 
 #### Zugriff auf Binäre Daten
 
@@ -769,4 +771,4 @@ updatedRows = stmt.executeUpdate();
 stmt.commit();
 ```
 
-# Test header 
+# Test header
