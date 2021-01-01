@@ -2,6 +2,15 @@
 
 > Summary for the databases 1 class at the University of Applied Sciences Karlsruhe(In German)
 
+## Workflow
+
+> This doc page is powered by Github pages
+
+1. Page source: The `index.md` file in the `./docs/` folder on the `master` branch has the current status.
+2. On Push:
+  - The CI/CD Pipeline is triggered to generate the TOC and lint the markdown for possible errors.
+  - The updated page is automatically published by github pages
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
