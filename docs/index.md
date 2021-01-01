@@ -101,7 +101,7 @@
 
 <!-- TODO beschr. der Einzelnen Schichten  ? -->
 
-# SQL
+# SQL - Grundlagen
 
 ## Begriffe
 
@@ -124,7 +124,7 @@
 
 ![Operatoren](./img/operatoren.png)
 
-## Datenabfragen
+# SQL - Datenabfragen
 
 Syntax:
 
@@ -151,7 +151,7 @@ Hilfreiche SQL commands:
 
 > In Klammern gesetzte "neue" Abfragen, welche die Hauptaufgabe mit Werten versorgt
 
-1. Unterabfragen, die **genau** einen Wert liefern.
+1. Unterabfragen, die **genau** einen Wert liefern. --> `... WHERE yxz = (SELECT ...)`
 2. Unterabfragen, **mehrere** Werte liefern.
 
 In `WHERE` Hauptabfrage Mengenoperationen nutzen, wenn in Unterabfragen mehrere Ergebniszeile liefert:
@@ -164,6 +164,8 @@ In `WHERE` Hauptabfrage Mengenoperationen nutzen, wenn in Unterabfragen mehrere 
 
 ### Θ Theta Operatoren
 
+> `=,<>, <=, >=...`
+
 Vorgang:
 
 1. Kreuzprodukt bilden(Bspw. mit doppelten Werten)
@@ -172,28 +174,28 @@ Vorgang:
 - **Korrelierte Unterabfrage**: Unterabfrage nimmt direkten Bezug auf Hauptabfrage
 - Mit **AS** Schlüsselwort den Tabellennamen abkürzen
 
-### Funktionen
+## Funktionen
 
 1. _Skalare Funktionen_ = Beziehen sich auf **ein Attribut**
 2. _Aggregatfunktionen_ = Beziehen sich auf **Menge von Zeilen**
 
 - `NULL`-Werte werden außer bei `COUNT(*)` nicht mit betrachtet.
 
-#### Skalare Funktionen
+### Skalare Funktionen
 
 - Mathematische Funkt.: `ABS, ACOS, ASIN, ATAN, ...`
 - Funktionen für Zeichenketten: `CHARINDEX/INSTR, LEFT, LEN(GTH), LOWER, ...`
 - Funktionen zur Zeit- & Datumsdokumentation:`CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP, ...`
 
-#### Aggregatfunktionen
+### Aggregatfunktionen
 
 > Dienen zur Berechnung von Summe, Maximum, etc. eines Attributs über mehrere Zeilen hinweg
 
 Beispiele: `AVG`, `MAX`, `MIN`, `SUM`, `STDDEV`(Standardabweichung der Werte), `COUNT`(Anzahl Werte)
 
-### Gruppierungen
+## Gruppierungen
 
-#### GROUP BY auf Aggregatfunktionen
+### GROUP BY auf Aggregatfunktionen
 
 Durch Schlüsselwort `GROUP BY` lassen sich Aggregatfunktionen auch auf Teilmengen von Zeilen anwenden.
 
@@ -205,7 +207,7 @@ Bspw.:
 
 > *Alle Spalten des SELECT's **müssen** in der GROUP BY-Klausel gebunden werden, außer jene Spalten des SELECT's die Aggregatfunktionen sind!*
 
-#### HAVING
+### HAVING
 
 > Teilmengen, die durch Aggregatfunktionen minimiert werden **einschränken**
 
@@ -225,7 +227,7 @@ Bspw.:
 6. *Mengenbildung* mit anderen SELECT's(Bspw. UNION)
 7. *Sortieren* nach ORDER BY
 
-### UNION
+## JOIN
 
 > Mehrere Tabellen verbinden & dadurch Primär/Fremdschlüssel Beziehungen in Abfragen auflösen
 
@@ -234,14 +236,14 @@ Bspw.:
 
 ==> Im Vergl. zu `WHERE` Klauseln, **Verbindung** direkt von **Restriktion** unterscheidbar
 
-#### Vorgang
+### Vorgang
 
 1. Erstellung **Kreuzprodukt aller** Tabellen
 2. Bestimmung zusammengehöriger Zeilen gemäß **OB-Bedingung**
 3. Anwendung d. *Restriktion* gemäß `WHERE`
 4. Durchführung d. *Projektion*, um gewünschten Spalten zu best.(* = alle Spalten aller Tabellen)
 
-#### Regeln & Hinweise zu JOIN
+### Regeln & Hinweise zu JOIN
 
 1. **Typen** der verb. Spalten müssen kompatibel sein.
 2. Spaltennamen müssen nicht gleich sein
@@ -249,26 +251,26 @@ Bspw.:
 4. `=` wird auch *Equi-Join*
 5. Bei Verbund, darf `JOIN` auch mehrere Spalten umfassen
 
-#### INNER JOIN
+### INNER JOIN
 
 > Gibt *Zeilen* zurück, bei denen es passende Werte in **beide** Tabellen gibt
 
 - `JOIN` = `INNER JOIN`
 - = Schnitt = &&
 
-#### Natural JOIN
+### Natural JOIN
 
 > Alle *Spalten* gleichen Namens verbinden
 
 - Bspw.: `SELECT s.first_name, s.last_name, s.first_name, l.last_name FROM students s NATURAL JOIN lecturers l` = `JOIN lecturers l ON l.account = s.account AND l.first_name = s.first_name AND l.last_name = s.last_name`
 
-#### Kaskadierende JOINs
+### Kaskadierende JOINs
 
 > Mehr als 2 Tabellen durch JOINs verbunden werden
 
 - 2mal `JOIN` benutzen um mehr als eine Tabelle zu verbinden
 
-#### Outer-JOINS
+### Outer-JOINS
 
 > Im Vergl. zu `INNER JOIN` erlaubt es, dass eine der beiden Seiten `NULL` ist
 
@@ -290,10 +292,7 @@ keine Entsprechung in anderer Tabelle benötigt(= darf `NULL` sein).
 
 See f.ex: <https://www.w3schools.com/sql/sql_join_left.asp>
 
-<!-- markdownlint-disable MD024 -->
-<!-- TODO check whether this double heading is legit -->
-### UNION
-<!-- markdownlint-enable MD024 -->
+## Mengenoperationen - UNION
 
 > Mit SELECT gewonnene Zeilen mengentheoretisch verknüpfen:
 
@@ -304,13 +303,13 @@ See f.ex: <https://www.w3schools.com/sql/sql_join_left.asp>
 
 Bis auf `UNION` kann man bei allen, die Ergebnisse mit `IN/NOT ON` bearbeiten.
 
-#### Regeln UNION
+### Regeln UNION
 
 1. Alle SELECTs müssen dieselbe Anzahl an Spalten liefern
 2. Spaltennamen der Zeilenmengen können verschiedene sein
 3. Spaltentypen müssen kompatibel sein. Zeilenmenge gibt Typen vor.
 
-#### Reihenfolge SELECTs bei UNION
+### Reihenfolge SELECTs bei UNION
 
 1. **Kreuzprodukt** über alle Tabellen, die durch FROM/JOIN spezifiziert werden
 2. **Restriktion**: Zeilen best., welche die WHERE-Bedingung erfüllen
@@ -332,9 +331,11 @@ WITH table_name as (
 SELECT ... FROM table_name WHERE ...
 ```
 
-## SQL-DDL Pt. 1
+# SQL-DDL Pt. 1
 
 > DDL = Data Definition Language beschreibt Struktur Tabelle & Datentypen d. Spalten
+
+## CREATE TABLE
 
 ```sql
 CREATE TABLE <table_name>
@@ -342,7 +343,7 @@ CREATE TABLE <table_name>
   [,integritätsregel1, ...,integritätsregelN]);
 ```
 
-Mit der `spaltendefinitionN`:
+Mit der `spaltendefinition`:
 
 ```sql
 spaltendefinitionN ::= spaltenname typangabe
@@ -355,7 +356,7 @@ spaltendefinitionN ::= spaltenname typangabe
 - Wichtige Spaltenintegritätsregel: `NOT NULL`
 - `DEFAULT`: Angabe eines Standard-Wertes, wenn beim einfügen kein Wert angegeben wird.
 
-### Datenintegrität
+## Datenintegrität
 
 Bedingungen:
 
@@ -367,14 +368,14 @@ Bedingungen:
 - *Referentielle Integrität*: Fremdschlüssel-Beziehungen werden überwacht
 - *Benutzerdefinierte Integrität*
 
-#### Primärschlüsseln & versch. Werte
+### Primärschlüsseln & versch. Werte
 
 > Eine oder mehrere Spalten, die einen Satz eindeutig charakterisiert(Entitäts Integrität)
 
 ```sql
 CREATE TABLE tableName {
 ...
-PRIMARY KEY (columnName)
+  PRIMARY KEY (columnName)
 }
 ```
 
@@ -424,15 +425,15 @@ tableName SMALLINT DEFAULT -1
 
 ![](./img/datInt.png)
 
-### Sequenzen
+## Sequenzen
 
 > Automatische vergabe von IDs
 
 ```sql
-CREATE SEQUENZCE <sequence_name> [AS datatype] [START WITH <constant> [INCREMENT BY <constant>]]
+CREATE SEQUENCE <sequence_name> [AS datatype] [START WITH <constant> [INCREMENT BY <constant>]]
 ```
 
-### Binärdaten
+## Binärdaten
 
 1. Ablage als BLOB(Binary Lage Object) in eigener Spalte `BLOBL(<SIZE>)`
 2. Kodierung als Text: `TEXT`
@@ -440,11 +441,11 @@ CREATE SEQUENZCE <sequence_name> [AS datatype] [START WITH <constant> [INCREMENT
 
 ![](./img/proConBinary.png)
 
-## SQL-DML
+# SQL-DML
 
 > Data-Manipulation-Language = Einfügen, Ändern & Löschen
 
-### Einfügen in eine Tabelle
+## Einfügen in eine Tabelle
 
 ```sql
 INSERT INTO <table_name> [(col1, col2, ..., colN)] VALUES (val1, val2, ..., valN);
@@ -452,7 +453,7 @@ INSERT INTO <table_name> [(col1, col2, ..., colN)] VALUES (val1, val2, ..., valN
 
 - Einfügen mit Abfrage von Werten: Vom Inhalt her (teilweise) kopiert werden mit `INSERT INTO`
 
-### Löschen aus Tabelle
+## Löschen aus Tabelle
 
 ```sql
 DELETE FROM <table_name> [WHERE <bedingung>]
@@ -463,7 +464,7 @@ Seiteneffekte:
 1. Durch *Foreign-Key-Constraints*, können mehr Zeilen als ursprünglich gelöscht werden
 2. ...
 
-### Ganze Tabellen Löschen
+## Ganze Tabellen Löschen
 
 ```sql
 DROP TABLE <table_name> [CASCADE]
@@ -471,7 +472,7 @@ DROP TABLE <table_name> [CASCADE]
 
 - `CASCADE`: Es werden auch Sätze in anderen Tabellen, die sich auf die zu löschende Tabellen beziehen entfernt.
 
-### Tabelle aktualisieren
+## Tabelle aktualisieren
 
 ```sql
 UPDATE <table_name> SET col1 = value1,...[WHERE <bedingung>];
@@ -479,9 +480,9 @@ UPDATE <table_name> SET col1 = value1,...[WHERE <bedingung>];
 
 - Bei keiner `WHERE`, Änderung aller Zeilen!
 
-## SQL-DDL 2. Teil
+# SQL-DDL 2. Teil
 
-### Sichten(Views)
+## Sichten(Views)
 
 > Virtuelle Tabellen
 
@@ -499,7 +500,7 @@ AS <abfrage> [WITH CHECK OPTION]
 - In `abfrage` kein `ORDER BY`
 - Mit View als "eigene Tabelle" arbeiten
 
-#### Materialisierte Sichten
+### Materialisierte Sichten
 
 > Beim ersten Zugriff auf View wird temporäre Tabelle mit Daten der View angelegt
 
@@ -511,7 +512,7 @@ AS <abfrage> [WITH CHECK OPTION]
 CREATE MATERIALIZED VIEW ...(See above)
 ```
 
-### Indexe
+## Indexe
 
 > Abfragen beschleunigen auf kosten zusätzlichen Speicherbedarfs & verlangsamten Bearbeitung v. DML-Befehlen
 
@@ -523,7 +524,7 @@ IN <table_name> (<spalten_name1>, ...) [ASC | DESC];
 - `UNIQUE`: Bei jeder Änderung geprüft, ob Spalte eindeutige Werte enthält
 - `CLUSTERED`: Jede Tabelle kann solchen Index besitzen. Anhand dieses Indexes werden die Zeilen sortiert gehalten.
 
-### Stored Procedures
+## Stored Procedures
 
 > In Datenbank gespeicherte Funktionen
 
@@ -531,7 +532,7 @@ IN <table_name> (<spalten_name1>, ...) [ASC | DESC];
 - Rumpf = Zeichenkette, in der Backslashs / einfache Ausführungszeichen mit Escape-Sequenzen markiert werden müssen
 - Auch `$$` nutzen um escaping zu übergehen
 
-### Trigger
+## Trigger
 
 > Werden von Ereignissen wie z.B. dem Aktualisieren v. Daten ausgelöst & können z.B *stored Procedures* aufrufen
 
@@ -547,7 +548,7 @@ FOR EACH ROW | STATEMENT <action>
 - `sql-aktion`: `INSERT, UPDATE, DELETE, ...`
 - `aktion>`: `EXECUTE, PROCEDERE <prozedur> ...`
 
-### Datenintegrität durch Constraints
+## Datenintegrität durch Constraints
 
 > Mit Assertions, sehr mächtiges Tool um konsistente Zustände zu gewährleisten
 
@@ -561,7 +562,7 @@ FOR EACH ROW | STATEMENT <action>
 
 - Nutzen bspw. bei `ALTER`, `CREATE`, ...
 
-### Zugriffsrechte
+## Zugriffsrechte
 
 1. AutorisierungsID
 2. DB-Ausschnitt
@@ -572,10 +573,9 @@ FOR EACH ROW | STATEMENT <action>
 ....See Slides for details
 
 <!-- TODO Sicherheit & Datenschutz (Klausur)-relevant? -->
-
 <!-- WIP Slide 244 -->
 
-### Transaktionen
+# Transaktionen
 
 > Folge von SQL-Anweisungen als Einheit betrachtet
 
@@ -588,9 +588,18 @@ FOR EACH ROW | STATEMENT <action>
   3. Isolation
   4. Durability
 
-See Slide 268 for more details.
+```sql
+BEGIN TRANSACTION transaction_name ;
+...
+SET TRANSACTION [ READ WRITE | READ ONLY ];
+...
+COMMIT;
+...
+```
 
-#### Fehlerklassen im Prallelbetrieb
+Also see: https://www.geeksforgeeks.org/sql-transactions/
+
+## Fehlerklassen im Prallelbetrieb
 
 1. **Lost-Update-Problem**:
 
@@ -608,7 +617,7 @@ See Slide 268 for more details.
 
 - Mehrmaliges lesen aus derselben Zeilen führt zu unterschiedlichen Anzahl an Datensätzen
 
-#### Isolationsebenen
+## Isolationsebenen
 
 1. **Read Uncommitted**:
 
@@ -627,7 +636,7 @@ See Slide 268 for more details.
 
 <!-- TODO sperren? -->
 
-#### Integritätssicherung
+## Integritätssicherung
 
 Verschiedene Varianten:
 
@@ -635,25 +644,29 @@ Verschiedene Varianten:
 2. "Monitor": Integritätsmonitor innerhalb d. DBMW überwacht alle Bedingungen
 3. "Kapselung": Zugriff auf DBMS erfolgt über Zwischenschicht
 
-### NULL-Werte
+<!-- DOING REVIEW -->
+# NULL-Werte
 
 > Zeigen an, dass Wert fehlt
 
 1. Keine Werte an sich
 2. Führen zu missverständliche Logik: **Wahr, Falsch oder unbekannt**
 
-#### Skalare Ausdrücke
+## Skalare Ausdrücke
 
 > Mit Funktion `COALESCE` dem NULL-Wert eine Bedeutung geben
 
 - `COALESCE`, wählt aus Parameterliste v. links den ersten Wert aus, d. nicht NULL ist.
 - Umkehrfunktion `NULLIF(a, b)`, die NULL zurückgibt, wenn `a==b` ansonsten erste Argument
 
+<!-- TODO  Dreiwertige Logik, JOINS,...(Restliche NULL values) -->
 <!-- TODO NULL Werte Bzgl, versch. SQL Befehle Betrachten(JOIN, Aggregat, WHERE, ...) -->
 
-<!-- --- -->
-<!-- TODO Modellierung ..... -->
-<!-- --- -->
+# Modellierung
+
+![](./img/modelierung.png)
+
+
 
 ### Java-Sprachanbindungen(JDBC)
 
