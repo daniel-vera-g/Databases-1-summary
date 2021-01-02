@@ -39,8 +39,6 @@ jobs:
       - name: Update markdown TOC
         run: cd $GITHUB_WORKSPACE/docs && ./update-toc.sh
 
-
-
   update-files:
     runs-on: ubuntu-latest
     steps:
@@ -63,3 +61,37 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+
+
+  # TODO use pandocker: https://github.com/dalibo/pandocker
+  generate-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      # Pre-work
+      - name: Install latex
+        run: sudo apt install texlive-full
+        # run: sudo apt install texlive-latex-extra xzdec
+      # TODO sort this out for minimal installation
+      # - name: Install needed packages
+      #   run: |
+      #        sudo tlmgr option repository ftp://tug.org/historic/systems/texlive/2017/tlnet-final
+      #        tlmgr init-usertree
+      #        sudo tlmgr update --all
+      #        tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
+      - name: Install pandoc
+        run: sudo apt install pandoc
+      - name: Install eisvogel template
+        # Living dangerously and getting directly from master...
+        run: |
+             wget https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex -P ~/.pandoc/templates/
+             mkdir -p ~/.pandoc/tempates/
+             mv ~/.pandoc/templates/eisvogel.tex ~/.pandoc/templates/eisvogel.latex
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - name: Create PDF
+        run:  pandoc docs/index.md -o docs/index.pdf --from markdown --template eisvogel --listings -N
+      - name: Upload PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: db1-summary
+          path: docs/index.pdf
