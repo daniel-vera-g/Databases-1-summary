@@ -72,6 +72,7 @@ jobs:
         run: sudo apt install texlive-latex-extra xzdec
       - name: Install needed packages
         run: |
+             sudo tlmgr option repository ftp://tug.org/historic/systems/texlive/2017/tlnet-final
              tlmgr init-usertree
              tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
       - name: Install pandoc
