@@ -71,7 +71,9 @@ jobs:
       - name: Install latex
         run: sudo apt install texlive-latex-extra
       - name: Install needed packages
-        run: tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
+        run: |
+             tlmgr init-usertree
+             tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
       - name: Install pandoc
         run: sudo apt install pandoc
       - name: Install eisvogel template
