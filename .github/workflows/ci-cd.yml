@@ -69,7 +69,7 @@ jobs:
     steps:
       # Pre-work
       - name: Install latex
-        run: sudo apt install texlive-latex-extra
+        run: sudo apt install texlive-latex-extra xzdec
       - name: Install needed packages
         run: |
              tlmgr init-usertree
