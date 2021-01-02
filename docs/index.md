@@ -667,8 +667,94 @@ Verschiedene Varianten:
 ![](./img/modelierung.png)
 
 
+## Konzeptionelles Modell
 
-### Java-Sprachanbindungen(JDBC)
+> Bestandsaufnahme durch Untersuchung der Realwelt
+
+* ER-Diagramm nutzen
+
+![](./img/grundelemente.png)
+
+1. *Entität*:
+  - Entitätstypen sind zeitlich konstant bzgl. Existenz und Beschreibung
+  - Kleinste Einheit eines Informationsmodells
+2. *Attribute*:
+  - Beschreiben Entitäten
+  - Schlüsselattribute (Primärschlüssel, Sekundärschlüssel, Fremdschlüssel) -> Unterstrichen darstellen!
+  - ...
+3. *Beziehungen*:
+  - Multiplizität der Beteiligten (Mindestzahl, Maximalzahl, synonym: Kardinalität)
+  - Attribute für Beziehungen
+
+![](./img/kard.png)
+![](./img/kard2.png)
+
+### Entscheidungshelfer
+
+1. Entität: E1 - E4
+2. Attribut: A1 - A3
+3. Beziehung: B1 - B3
+
+![](./img/ent.png)
+![](./img/ent2.png)
+![](./img/ent3.png)
+
+## Logisches Modell
+
+> Zuordnung von Entitäten (Objekten) zu Tabellen
+
+- Beschreibung der Beziehungen zwischen den Objekten durch Tabellenspalten und zusätzliche Tabellen, Berücksichtigung von Fremdschlüsselbeziehungen
+- Ermittlung der Primärschlüssel
+- Abbildung der Vererbung, die es in relationalen Datenbanken so nicht gibt
+- Sicherstellung der referentiellen Integrität
+- Konsistenz der Daten
+- beschreibt eine logische Tabellenstruktur
+
+### Mit Beziehungen umgehen
+
+> Es werde oftmals nicht alle möglicheiten dargelegt
+
+1. `1:c`:
+  - Entwurf v. 2 Relationen(Mit *Fremdschlüssel*)
+  - Entwurf einer Relation(Nur sinnvoll, wenn "Haupt"-Entitätstyp keine weiteren Beziehungen eingeht)
+2. Nutzung von **Vererbung**:
+  - Es gibt für den Supertyp sowie für den Subtyp eine Relation/Tabelle
+  - Subtyp enthält eigene Attribute & Fremdschlüssel zum Supertyp
+3. `1:n`: 
+  - 2 Tabellen, die Beziehungs-Attribute wandern auf die „n“-Seite.
+  - Als n:m-Beziehung modellieren
+4. `n:m`: 
+  - 2 `n:m` Entitäten durch dritte Relation auflösen ^= *Link-Relation*
+  - In dritter Entität Beziehungsattribute speichern
+  - Primärschlüssel d. dritten Relation entspr. Primärschlüsselattributen der beiden anderen Entitäten oder es werden Surrogatschlüssel eingesetzt.
+
+![](./img/nm.png)
+
+### Festlegung d. Schlüssel
+
+1. Primärschlüssel
+  - Nach Mögl. gleich heißen(Bspw. "id")
+  - Oder "natürliche" Schlüssel aus Kontext
+2. Fremdschlüssel
+  - Durch Suffix(`_id`) oder Prefix(`id_`) kenntlich gemacht werden
+
+## Physikalisches Modell
+
+> Entsteht aus dem logischen Modell, ist die Implementierung der Datenbank
+
+- Abhängig von einem konkreten DBMS und optimiert für dieses
+- Festlegung der genauen SQL-Datentypen
+- Beschreibung des Modells häufig direkt durch SQL
+- Einführung von Indizes für effiziente Zugriffe
+
+# Normalisierung
+
+<!-- TBD after lecure -->
+
+
+# Java-Sprachanbindungen(JDBC)
+
+![](./img/jdbc.png)
 
  1. Verbindungsaufbau
 
@@ -686,10 +772,9 @@ Verschiedene Varianten:
  4. Aufräumen:
 
 - Schließen mit jeweiliger close-Methode von:
-
-- ResultSet
-- (Prepared-)Statement
-- Verbindung
+  - ResultSet
+  - (Prepared-)Statement
+  - Verbindung
 
 ```java
 public static void main(String[] args) throws ClassNotFoundException {
@@ -745,10 +830,7 @@ InputStream str = blob.getBinaryStream();
 byte[] data = blob.getBytes(0, blob.length()
 ```
 
-<!-- markdownlint-disable MD024 -->
-<!-- TODO check whether this double heading is legit -->
-#### Transaktionen
-<!-- markdownlint-enable MD024 -->
+## JDBC: Transaktionen
 
 ```java
 ...
@@ -766,7 +848,7 @@ System.out.println("Geänderte Zeilen: " + updatedRows);
 connection.commit();
 ```
 
-#### Prepared Statements
+### Prepared Statements
 
 > Platzhalter durch `Set-Operationen` später im SQL Kommando ersetzt
 
@@ -775,7 +857,7 @@ connection.commit();
 - Row-Prefetching
 - Connection-Pool: Verbindungen & Transaktionen nur kurz geöffnet sein umd Server nicht unnötig unter last zu setzen
 
-```sql
+```java
 PreparedStatement stmt = connection.prepareStatement(
 "UPDATE applications SET grade = ? WHERE id = ?");
 stmt.setInt(1, 200); // Erster Wert = Note
@@ -790,4 +872,6 @@ updatedRows = stmt.executeUpdate();
 stmt.commit();
 ```
 
-# Test header
+# ORMs
+
+<!-- TBD after lecure -->
