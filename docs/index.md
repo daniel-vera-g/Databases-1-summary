@@ -61,7 +61,7 @@
   - [Physikalisches Modell](#physikalisches-modell)
 - [Normalisierung](#normalisierung)
 - [Java-Sprachanbindungen(JDBC)](#java-sprachanbindungenjdbc)
-      - [Zugriff auf Binäre Daten](#zugriff-auf-binäre-daten)
+  - [Zugriff auf Binäre Daten](#zugriff-auf-binäre-daten)
   - [JDBC: Transaktionen](#jdbc-transaktionen)
     - [Prepared Statements](#prepared-statements)
 - [ORMs](#orms)
@@ -675,25 +675,29 @@ Verschiedene Varianten:
 
 ![](./img/modelierung.png)
 
-
 ## Konzeptionelles Modell
 
 > Bestandsaufnahme durch Untersuchung der Realwelt
 
-* ER-Diagramm nutzen
+- ER-Diagramm nutzen
 
 ![](./img/grundelemente.png)
 
 1. *Entität*:
-  - Entitätstypen sind zeitlich konstant bzgl. Existenz und Beschreibung
-  - Kleinste Einheit eines Informationsmodells
+
+- Entitätstypen sind zeitlich konstant bzgl. Existenz und Beschreibung
+- Kleinste Einheit eines Informationsmodells
+
 2. *Attribute*:
-  - Beschreiben Entitäten
-  - Schlüsselattribute (Primärschlüssel, Sekundärschlüssel, Fremdschlüssel) -> Unterstrichen darstellen!
-  - ...
+
+- Beschreiben Entitäten
+- Schlüsselattribute (Primärschlüssel, Sekundärschlüssel, Fremdschlüssel) -> Unterstrichen darstellen!
+- ...
+
 3. *Beziehungen*:
-  - Multiplizität der Beteiligten (Mindestzahl, Maximalzahl, synonym: Kardinalität)
-  - Attribute für Beziehungen
+
+- Multiplizität der Beteiligten (Mindestzahl, Maximalzahl, synonym: Kardinalität)
+- Attribute für Beziehungen
 
 ![](./img/kard.png)
 ![](./img/kard2.png)
@@ -724,28 +728,38 @@ Verschiedene Varianten:
 > Es werde oftmals nicht alle möglicheiten dargelegt
 
 1. `1:c`:
-  - Entwurf v. 2 Relationen(Mit *Fremdschlüssel*)
-  - Entwurf einer Relation(Nur sinnvoll, wenn "Haupt"-Entitätstyp keine weiteren Beziehungen eingeht)
+
+- Entwurf v. 2 Relationen(Mit *Fremdschlüssel*)
+- Entwurf einer Relation(Nur sinnvoll, wenn "Haupt"-Entitätstyp keine weiteren Beziehungen eingeht)
+
 2. Nutzung von **Vererbung**:
-  - Es gibt für den Supertyp sowie für den Subtyp eine Relation/Tabelle
-  - Subtyp enthält eigene Attribute & Fremdschlüssel zum Supertyp
-3. `1:n`: 
-  - 2 Tabellen, die Beziehungs-Attribute wandern auf die „n“-Seite.
-  - Als n:m-Beziehung modellieren
-4. `n:m`: 
-  - 2 `n:m` Entitäten durch dritte Relation auflösen ^= *Link-Relation*
-  - In dritter Entität Beziehungsattribute speichern
-  - Primärschlüssel d. dritten Relation entspr. Primärschlüsselattributen der beiden anderen Entitäten oder es werden Surrogatschlüssel eingesetzt.
+
+- Es gibt für den Supertyp sowie für den Subtyp eine Relation/Tabelle
+- Subtyp enthält eigene Attribute & Fremdschlüssel zum Supertyp
+
+3. `1:n`:
+
+- 2 Tabellen, die Beziehungs-Attribute wandern auf die „n“-Seite.
+- Als n:m-Beziehung modellieren
+
+4. `n:m`:
+
+- 2 `n:m` Entitäten durch dritte Relation auflösen ^= *Link-Relation*
+- In dritter Entität Beziehungsattribute speichern
+- Primärschlüssel d. dritten Relation entspr. Primärschlüsselattributen der beiden anderen Entitäten oder es werden Surrogatschlüssel eingesetzt.
 
 ![](./img/nm.png)
 
 ### Festlegung d. Schlüssel
 
 1. Primärschlüssel
-  - Nach Mögl. gleich heißen(Bspw. "id")
-  - Oder "natürliche" Schlüssel aus Kontext
+
+- Nach Mögl. gleich heißen(Bspw. "id")
+- Oder "natürliche" Schlüssel aus Kontext
+
 2. Fremdschlüssel
-  - Durch Suffix(`_id`) oder Prefix(`id_`) kenntlich gemacht werden
+
+- Durch Suffix(`_id`) oder Prefix(`id_`) kenntlich gemacht werden
 
 ## Physikalisches Modell
 
@@ -759,7 +773,6 @@ Verschiedene Varianten:
 # Normalisierung
 
 <!-- TBD after lecure -->
-
 
 # Java-Sprachanbindungen(JDBC)
 
@@ -821,7 +834,7 @@ catch (SQLException ex) {
 
 - Datenbank-URL: `dbms-name://host:port/database?request-parameter`
 
-#### Zugriff auf Binäre Daten
+## Zugriff auf Binäre Daten
 
 > Daten können sehr groß sein --> Streams nutzen
 
