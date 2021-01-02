@@ -69,11 +69,11 @@ jobs:
     steps:
       # Pre-work
       - name: Install latex
-        run: apt install texlive-latex-extra
+        run: sudo apt install texlive-latex-extra
       - name: Install needed packages
         run: tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
       - name: Install pandoc
-        run: apt install pandoc
+        run: sudo apt install pandoc
       - name: Install eisvogel template
         # Living dangerously and getting directly from master...
         run: |
