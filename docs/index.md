@@ -2,60 +2,69 @@
 - [Relationale Datenbanken](#relationale-datenbanken)
   - [Beziehungen](#beziehungen)
 - [Database management system](#database-management-system)
-- [SQL](#sql)
+- [SQL - Grundlagen](#sql---grundlagen)
   - [Begriffe](#begriffe)
   - [Datentypen](#datentypen)
   - [Operatoren](#operatoren)
-  - [Datenabfragen](#datenabfragen)
+- [SQL - Datenabfragen](#sql---datenabfragen)
   - [Unterabfragen](#unterabfragen)
-    - [Θ Theta Operatoren](#θ-theta-operatoren)
-    - [Funktionen](#funktionen)
-      - [Skalare Funktionen](#skalare-funktionen)
-      - [Aggregatfunktionen](#aggregatfunktionen)
-    - [Gruppierungen](#gruppierungen)
-      - [GROUP BY auf Aggregatfunktionen](#group-by-auf-aggregatfunktionen)
-      - [HAVING](#having)
+    - [Theta Operatoren](#theta-operatoren)
+  - [Funktionen](#funktionen)
+    - [Skalare Funktionen](#skalare-funktionen)
+    - [Aggregatfunktionen](#aggregatfunktionen)
+  - [Gruppierungen](#gruppierungen)
+    - [GROUP BY auf Aggregatfunktionen](#group-by-auf-aggregatfunktionen)
+    - [HAVING](#having)
       - [Reihenfolge Ausführung der Anweisungen](#reihenfolge-ausführung-der-anweisungen)
-    - [UNION](#union)
-      - [Vorgang](#vorgang)
-      - [Regeln & Hinweise zu JOIN](#regeln--hinweise-zu-join)
-      - [INNER JOIN](#inner-join)
-      - [Natural JOIN](#natural-join)
-      - [Kaskadierende JOINs](#kaskadierende-joins)
-      - [Outer-JOINS](#outer-joins)
-    - [UNION](#union-1)
-      - [Regeln UNION](#regeln-union)
-      - [Reihenfolge SELECTs bei UNION](#reihenfolge-selects-bei-union)
+  - [JOIN](#join)
+    - [Vorgang](#vorgang)
+    - [Regeln & Hinweise zu JOIN](#regeln--hinweise-zu-join)
+    - [INNER JOIN](#inner-join)
+    - [Natural JOIN](#natural-join)
+    - [Kaskadierende JOINs](#kaskadierende-joins)
+    - [Outer-JOINS](#outer-joins)
+  - [Mengenoperationen - UNION](#mengenoperationen---union)
+    - [Regeln UNION](#regeln-union)
+    - [Reihenfolge SELECTs bei UNION](#reihenfolge-selects-bei-union)
     - [WITH](#with)
-  - [SQL-DDL Pt. 1](#sql-ddl-pt-1)
-    - [Datenintegrität](#datenintegrität)
-      - [Primärschlüsseln & versch. Werte](#primärschlüsseln--versch-werte)
-    - [Sequenzen](#sequenzen)
-    - [Binärdaten](#binärdaten)
-  - [SQL-DML](#sql-dml)
-    - [Einfügen in eine Tabelle](#einfügen-in-eine-tabelle)
-    - [Löschen aus Tabelle](#löschen-aus-tabelle)
-    - [Ganze Tabellen Löschen](#ganze-tabellen-löschen)
-    - [Tabelle aktualisieren](#tabelle-aktualisieren)
-  - [SQL-DDL 2. Teil](#sql-ddl-2-teil)
-    - [Sichten(Views)](#sichtenviews)
-      - [Materialisierte Sichten](#materialisierte-sichten)
-    - [Indexe](#indexe)
-    - [Stored Procedures](#stored-procedures)
-    - [Trigger](#trigger)
-    - [Datenintegrität durch Constraints](#datenintegrität-durch-constraints)
-    - [Zugriffsrechte](#zugriffsrechte)
-    - [Transaktionen](#transaktionen)
-      - [Fehlerklassen im Prallelbetrieb](#fehlerklassen-im-prallelbetrieb)
-      - [Isolationsebenen](#isolationsebenen)
-      - [Integritätssicherung](#integritätssicherung)
-    - [NULL-Werte](#null-werte)
-      - [Skalare Ausdrücke](#skalare-ausdrücke)
-    - [Java-Sprachanbindungen(JDBC)](#java-sprachanbindungenjdbc)
-      - [Zugriff auf Binäre Daten](#zugriff-auf-binäre-daten)
-      - [Transaktionen](#transaktionen-1)
-      - [Prepared Statements](#prepared-statements)
-- [Test header](#test-header)
+- [SQL-DDL Pt. 1](#sql-ddl-pt-1)
+  - [CREATE TABLE](#create-table)
+  - [Datenintegrität](#datenintegrität)
+    - [Primärschlüsseln & versch. Werte](#primärschlüsseln--versch-werte)
+  - [Sequenzen](#sequenzen)
+  - [Binärdaten](#binärdaten)
+- [SQL-DML](#sql-dml)
+  - [Einfügen in eine Tabelle](#einfügen-in-eine-tabelle)
+  - [Löschen aus Tabelle](#löschen-aus-tabelle)
+  - [Ganze Tabellen Löschen](#ganze-tabellen-löschen)
+  - [Tabelle aktualisieren](#tabelle-aktualisieren)
+- [SQL-DDL 2. Teil](#sql-ddl-2-teil)
+  - [Sichten(Views)](#sichtenviews)
+    - [Materialisierte Sichten](#materialisierte-sichten)
+  - [Indexe](#indexe)
+  - [Stored Procedures](#stored-procedures)
+  - [Trigger](#trigger)
+  - [Datenintegrität durch Constraints](#datenintegrität-durch-constraints)
+  - [Zugriffsrechte](#zugriffsrechte)
+- [Transaktionen](#transaktionen)
+  - [Fehlerklassen im Prallelbetrieb](#fehlerklassen-im-prallelbetrieb)
+  - [Isolationsebenen](#isolationsebenen)
+  - [Integritätssicherung](#integritätssicherung)
+- [NULL-Werte](#null-werte)
+  - [Skalare Ausdrücke](#skalare-ausdrücke)
+- [Modellierung](#modellierung)
+  - [Konzeptionelles Modell](#konzeptionelles-modell)
+    - [Entscheidungshelfer](#entscheidungshelfer)
+  - [Logisches Modell](#logisches-modell)
+    - [Mit Beziehungen umgehen](#mit-beziehungen-umgehen)
+    - [Festlegung d. Schlüssel](#festlegung-d-schlüssel)
+  - [Physikalisches Modell](#physikalisches-modell)
+- [Normalisierung](#normalisierung)
+- [Java-Sprachanbindungen(JDBC)](#java-sprachanbindungenjdbc)
+  - [Zugriff auf Binäre Daten](#zugriff-auf-binäre-daten)
+  - [JDBC: Transaktionen](#jdbc-transaktionen)
+    - [Prepared Statements](#prepared-statements)
+- [ORMs](#orms)
 <!-- markdownlint-enable  MD032 -->
 # Relationale Datenbanken
 
@@ -158,11 +167,11 @@ In `WHERE` Hauptabfrage Mengenoperationen nutzen, wenn in Unterabfragen mehrere 
 
 1. `IN`: Wert mind. einmal in Ergebnis der Unterabfragen enthalten
 2. `EXISTS`: Wenigstens eine Zeile der Unterabfrage eine Bedingung erfüllt
-3. `Θ ANY` oder `Θ SOME`: Irgendeine Zeile eine Bedingung der Operatoren für Mengenvergleiche(=,<>, <=, >=... => Theta-Operatoren Θ) erfüllt.
-4. `ALL`: Alle Zeilen den Operator Θ erfüllen.
+3. `ANY` oder `SOME`: Irgendeine Zeile eine Bedingung der Operatoren für Mengenvergleiche(=,<>, <=, >=... => Theta-Operatoren) erfüllt.
+4. `ALL`: Alle Zeilen den Theta-Operator erfüllen.
 5. `NOT`: Negation. Nutzbar in Kombination mit Bspw. `EXISTS`
 
-### Θ Theta Operatoren
+### Theta Operatoren
 
 > `=,<>, <=, >=...`
 
@@ -666,25 +675,29 @@ Verschiedene Varianten:
 
 ![](./img/modelierung.png)
 
-
 ## Konzeptionelles Modell
 
 > Bestandsaufnahme durch Untersuchung der Realwelt
 
-* ER-Diagramm nutzen
+- ER-Diagramm nutzen
 
 ![](./img/grundelemente.png)
 
 1. *Entität*:
-  - Entitätstypen sind zeitlich konstant bzgl. Existenz und Beschreibung
-  - Kleinste Einheit eines Informationsmodells
+
+- Entitätstypen sind zeitlich konstant bzgl. Existenz und Beschreibung
+- Kleinste Einheit eines Informationsmodells
+
 2. *Attribute*:
-  - Beschreiben Entitäten
-  - Schlüsselattribute (Primärschlüssel, Sekundärschlüssel, Fremdschlüssel) -> Unterstrichen darstellen!
-  - ...
+
+- Beschreiben Entitäten
+- Schlüsselattribute (Primärschlüssel, Sekundärschlüssel, Fremdschlüssel) -> Unterstrichen darstellen!
+- ...
+
 3. *Beziehungen*:
-  - Multiplizität der Beteiligten (Mindestzahl, Maximalzahl, synonym: Kardinalität)
-  - Attribute für Beziehungen
+
+- Multiplizität der Beteiligten (Mindestzahl, Maximalzahl, synonym: Kardinalität)
+- Attribute für Beziehungen
 
 ![](./img/kard.png)
 ![](./img/kard2.png)
@@ -715,28 +728,38 @@ Verschiedene Varianten:
 > Es werde oftmals nicht alle möglicheiten dargelegt
 
 1. `1:c`:
-  - Entwurf v. 2 Relationen(Mit *Fremdschlüssel*)
-  - Entwurf einer Relation(Nur sinnvoll, wenn "Haupt"-Entitätstyp keine weiteren Beziehungen eingeht)
+
+- Entwurf v. 2 Relationen(Mit *Fremdschlüssel*)
+- Entwurf einer Relation(Nur sinnvoll, wenn "Haupt"-Entitätstyp keine weiteren Beziehungen eingeht)
+
 2. Nutzung von **Vererbung**:
-  - Es gibt für den Supertyp sowie für den Subtyp eine Relation/Tabelle
-  - Subtyp enthält eigene Attribute & Fremdschlüssel zum Supertyp
-3. `1:n`: 
-  - 2 Tabellen, die Beziehungs-Attribute wandern auf die „n“-Seite.
-  - Als n:m-Beziehung modellieren
-4. `n:m`: 
-  - 2 `n:m` Entitäten durch dritte Relation auflösen ^= *Link-Relation*
-  - In dritter Entität Beziehungsattribute speichern
-  - Primärschlüssel d. dritten Relation entspr. Primärschlüsselattributen der beiden anderen Entitäten oder es werden Surrogatschlüssel eingesetzt.
+
+- Es gibt für den Supertyp sowie für den Subtyp eine Relation/Tabelle
+- Subtyp enthält eigene Attribute & Fremdschlüssel zum Supertyp
+
+3. `1:n`:
+
+- 2 Tabellen, die Beziehungs-Attribute wandern auf die „n“-Seite.
+- Als n:m-Beziehung modellieren
+
+4. `n:m`:
+
+- 2 `n:m` Entitäten durch dritte Relation auflösen ^= *Link-Relation*
+- In dritter Entität Beziehungsattribute speichern
+- Primärschlüssel d. dritten Relation entspr. Primärschlüsselattributen der beiden anderen Entitäten oder es werden Surrogatschlüssel eingesetzt.
 
 ![](./img/nm.png)
 
 ### Festlegung d. Schlüssel
 
 1. Primärschlüssel
-  - Nach Mögl. gleich heißen(Bspw. "id")
-  - Oder "natürliche" Schlüssel aus Kontext
+
+- Nach Mögl. gleich heißen(Bspw. "id")
+- Oder "natürliche" Schlüssel aus Kontext
+
 2. Fremdschlüssel
-  - Durch Suffix(`_id`) oder Prefix(`id_`) kenntlich gemacht werden
+
+- Durch Suffix(`_id`) oder Prefix(`id_`) kenntlich gemacht werden
 
 ## Physikalisches Modell
 
@@ -750,7 +773,6 @@ Verschiedene Varianten:
 # Normalisierung
 
 <!-- TBD after lecure -->
-
 
 # Java-Sprachanbindungen(JDBC)
 
@@ -812,7 +834,7 @@ catch (SQLException ex) {
 
 - Datenbank-URL: `dbms-name://host:port/database?request-parameter`
 
-#### Zugriff auf Binäre Daten
+## Zugriff auf Binäre Daten
 
 > Daten können sehr groß sein --> Streams nutzen
 
