@@ -69,13 +69,15 @@ jobs:
     steps:
       # Pre-work
       - name: Install latex
-        run: sudo apt install texlive-latex-extra xzdec
-      - name: Install needed packages
-        run: |
-             sudo tlmgr option repository ftp://tug.org/historic/systems/texlive/2017/tlnet-final
-             tlmgr init-usertree
-             sudo tlmgr update --all
-             tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
+        run: sudo apt install texlive-full
+        # run: sudo apt install texlive-latex-extra xzdec
+      # TODO sort this out for minimal installation
+      # - name: Install needed packages
+      #   run: |
+      #        sudo tlmgr option repository ftp://tug.org/historic/systems/texlive/2017/tlnet-final
+      #        tlmgr init-usertree
+      #        sudo tlmgr update --all
+      #        tlmgr install adjustbox babel-german background bidi collectbox csquotes everypage filehook footmisc footnotebackref framed fvextra letltxmacro ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling ucharcat ulem unicode-math upquote xecjk xurl zref
       - name: Install pandoc
         run: sudo apt install pandoc
       - name: Install eisvogel template
